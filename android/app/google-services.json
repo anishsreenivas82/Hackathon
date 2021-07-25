@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "340062148145",
+    "project_id": "here4hygine",
+    "storage_bucket": "here4hygine.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:340062148145:android:e6049f4ff1dc6969e12710",
+        "android_client_info": {
+          "package_name": "com.udropp.NGOAPP"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "340062148145-dlcn40899aaf1hfrh3q63d691gfqon3f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEra5-n_2BMbuxZX0DTkk2ykdsjAMvRwA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "340062148145-dlcn40899aaf1hfrh3q63d691gfqon3f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
