@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutterlogindesign/pages/signin_page.dart';
 import 'package:flutterlogindesign/pages/splash_screen.dart';
+import 'package:flutterlogindesign/pages/splashscreen.dart';
 
 
 void main() {
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: SplashScreen(),
+      home: MyHomePage(),
     );
   }
 }
