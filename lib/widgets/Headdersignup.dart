@@ -8,7 +8,7 @@ class HeaderContainer1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.5,
+      
       color: Colors.lightBlueAccent,
       child: Column(
         children: <Widget>[
@@ -22,7 +22,7 @@ class HeaderContainer1 extends StatelessWidget {
           ),
           Center(
             child: Container(
-              padding: const EdgeInsets.all(35),
+              padding: const EdgeInsets.all(15),
             ),
           ),
           Center(
@@ -45,7 +45,7 @@ class HeaderContainer1 extends StatelessWidget {
           ),
           Center(
             child: Container(
-              padding: const EdgeInsets.all(55),
+              padding: const EdgeInsets.all(25),
             ),
           ),
           Center(
@@ -74,6 +74,11 @@ class HeaderContainer1 extends StatelessWidget {
               ),
             ),
           ),
+           Center(
+              child: Container(
+                padding: const EdgeInsets.all(5),
+              ),
+            ),
         ],
       ),
     );

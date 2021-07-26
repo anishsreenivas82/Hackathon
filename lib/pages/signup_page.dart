@@ -20,14 +20,13 @@ class _RegPageState extends State<RegPage> {
       };
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: Container(
-        padding: EdgeInsets.only(bottom: 30),
-        child: Column(
-          children: <Widget>[
-            HeaderContainer1("Sign Up"),
-            Expanded(
-              flex: 1,
+      body: SingleChildScrollView(
               child: Container(
+          padding: EdgeInsets.only(bottom: 30),
+          child: Column(
+            children: <Widget>[
+              HeaderContainer1("Sign Up"),
+              Container(
                 margin: EdgeInsets.only(left: 20, right: 20, top: 30),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
@@ -37,16 +36,20 @@ class _RegPageState extends State<RegPage> {
                     _textInput(
                         hint: "Phone Number",
                         icon: Icons.phone_android_outlined),
-                    Expanded(
-                      child: Center(
-                        child: ButtonWidget(
-                          btnText: "SIGN UP",
-                          onClick: () {
-                            Navigator.pop(context);
-                          },
+                        SizedBox(
+                          height:15
                         ),
+                    Center(
+                      child: ButtonWidget(
+                        btnText: "SIGN UP",
+                        onClick: () {
+                          Navigator.pop(context);
+                        },
                       ),
                     ),
+                     SizedBox(
+                          height:15
+                        ),
                     RichText(
                       text: TextSpan(children: [
                         TextSpan(
@@ -63,9 +66,9 @@ class _RegPageState extends State<RegPage> {
                     )
                   ],
                 ),
-              ),
-            )
-          ],
+              )
+            ],
+          ),
         ),
       ),
     );
