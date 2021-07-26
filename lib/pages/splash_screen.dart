@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutterlogindesign/pages/signin_page.dart';
+import 'package:flutterlogindesign/pages/signup_page.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -11,8 +12,10 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+            automaticallyImplyLeading:
+                false, //To remove back arrow for navigator push
             title: Text(
-              "Choose your role:",
+              "Insert Generic App Name",
               style: TextStyle(color: Colors.white),
             ),
             centerTitle: true,
@@ -39,19 +42,24 @@ class _SplashScreenState extends State<SplashScreen> {
                             height: 100,
                             width: 100,
                             child: FittedBox(
-                                      child: FloatingActionButton(
-                              onPressed: (){},
-                              child: ConstrainedBox(
-            constraints: new BoxConstraints.expand(),
-            child: new Image.asset('assets/do.png', fit: BoxFit.cover, gaplessPlayback: true),
-                              )
-            
-                              ),
+                              child: FloatingActionButton(
+                                  onPressed: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => LoginPage()));
+                                  },
+                                  child: ConstrainedBox(
+                                    constraints: new BoxConstraints.expand(),
+                                    child: new Image.asset('assets/do.png',
+                                        fit: BoxFit.cover,
+                                        gaplessPlayback: true),
+                                  )),
                             ),
                           ),
                           SizedBox(
-                  height: 20.00,
-                ),
+                            height: 20.00,
+                          ),
                           Text('Sign in as a Donor')
                         ],
                       ),
@@ -64,20 +72,24 @@ class _SplashScreenState extends State<SplashScreen> {
                             height: 100,
                             width: 100,
                             child: FittedBox(
-                                      
-                                      child: FloatingActionButton(
-                              onPressed: (){},
-                              child: ConstrainedBox(
-            constraints: new BoxConstraints.expand(),
-            child: new Image.asset('assets/h1.png', fit: BoxFit.cover, gaplessPlayback: true),
-                              )
-            
-                              ),
+                              child: FloatingActionButton(
+                                  onPressed: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => LoginPage()));
+                                  },
+                                  child: ConstrainedBox(
+                                    constraints: new BoxConstraints.expand(),
+                                    child: new Image.asset('assets/h1.png',
+                                        fit: BoxFit.cover,
+                                        gaplessPlayback: true),
+                                  )),
                             ),
                           ),
                           SizedBox(
-                  height: 20.00,
-                ),
+                            height: 20.00,
+                          ),
                           Text('Sign in as a Reciver')
                         ],
                       ),
@@ -85,40 +97,40 @@ class _SplashScreenState extends State<SplashScreen> {
                   ],
                 ),
               ),
-               SizedBox(
+              SizedBox(
                 height: 10.00,
               ),
               Center(
                 child: Padding(
-                      padding: const EdgeInsets.fromLTRB(25, 25, 20, 45),
-                      child: Column(
-                        children: [
-                          Container(
-                            height: 120,
-                            width: 120,
-                            child: FittedBox(
-                                      child: FloatingActionButton(
-                              onPressed: (){},
+                  padding: const EdgeInsets.fromLTRB(25, 25, 20, 45),
+                  child: Column(
+                    children: [
+                      Container(
+                        height: 120,
+                        width: 120,
+                        child: FittedBox(
+                          child: FloatingActionButton(
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => LoginPage()));
+                              },
                               child: ConstrainedBox(
-            constraints: new BoxConstraints.expand(),
-            child: new Image.asset('assets/3.png', fit: BoxFit.cover, gaplessPlayback: true),
-                              )
-            
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                  height: 20.00,
-                ),
-                          Text('Sign in as a Volunteer')
-                        ],
+                                constraints: new BoxConstraints.expand(),
+                                child: new Image.asset('assets/3.png',
+                                    fit: BoxFit.cover, gaplessPlayback: true),
+                              )),
+                        ),
                       ),
-                    ),
+                      SizedBox(
+                        height: 20.00,
+                      ),
+                      Text('Sign in as a Volunteer')
+                    ],
+                  ),
+                ),
               )
-
-
-
-                        
             ],
           ),
         ));

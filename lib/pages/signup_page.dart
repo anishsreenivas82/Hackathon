@@ -19,9 +19,15 @@ class _RegPageState extends State<RegPage> {
         Navigator.pop(context);
       };
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      appBar: AppBar(
+          title: Text(
+            "SignUp",
+            style: TextStyle(color: Colors.white),
+          ),
+          centerTitle: true,
+          backgroundColor: Colors.blue),
       body: SingleChildScrollView(
-              child: Container(
+        child: Container(
           padding: EdgeInsets.only(bottom: 30),
           child: Column(
             children: <Widget>[
@@ -36,9 +42,7 @@ class _RegPageState extends State<RegPage> {
                     _textInput(
                         hint: "Phone Number",
                         icon: Icons.phone_android_outlined),
-                        SizedBox(
-                          height:15
-                        ),
+                    SizedBox(height: 15),
                     Center(
                       child: ButtonWidget(
                         btnText: "SIGN UP",
@@ -47,9 +51,7 @@ class _RegPageState extends State<RegPage> {
                         },
                       ),
                     ),
-                     SizedBox(
-                          height:15
-                        ),
+                    SizedBox(height: 15),
                     RichText(
                       text: TextSpan(children: [
                         TextSpan(
