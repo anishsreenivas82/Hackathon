@@ -16,8 +16,7 @@ class _RegPageState extends State<RegPage> {
   Widget build(BuildContext context) {
     _signinConditionRecognizer = TapGestureRecognizer()
       ..onTap = () {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => LoginPage()));
+        Navigator.pop(context);
       };
     return Scaffold(
       resizeToAvoidBottomInset: false,
