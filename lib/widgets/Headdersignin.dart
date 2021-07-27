@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 class HeaderContainer2 extends StatelessWidget {
   var text = "";
@@ -10,8 +11,8 @@ class HeaderContainer2 extends StatelessWidget {
     return Container(
       // height: MediaQuery.of(context).size.height * 0.5,
       color: Colors.lightBlueAccent,
-      child:Wrap(
-              children: [Column(
+      child: Wrap(children: [
+        Column(
           children: <Widget>[
             Center(
               child: Container(
@@ -19,7 +20,7 @@ class HeaderContainer2 extends StatelessWidget {
               ),
             ),
             Center(
-              child: Image.asset("assets/logo.png"),
+              child: Lottie.asset('assets/lottie/lottie.json'),
             ),
             Center(
               child: Container(
@@ -75,14 +76,14 @@ class HeaderContainer2 extends StatelessWidget {
                 ),
               ),
             ),
-             Center(
+            Center(
               child: Container(
                 padding: const EdgeInsets.all(5),
               ),
             ),
           ],
-        ),]
-      ),
+        ),
+      ]),
     );
   }
 }

@@ -4,6 +4,7 @@ import 'package:flutterlogindesign/pages/signup_page.dart';
 import 'package:flutterlogindesign/widgets/Headdersignin.dart';
 import 'package:flutterlogindesign/widgets/btn_widget.dart';
 import 'package:flutterlogindesign/widgets/Headdersignup.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 Route _createRoute() {
   return PageRouteBuilder(
@@ -40,7 +41,8 @@ class _LoginPageState extends State<LoginPage> {
       ..onTap = () {
         Navigator.of(context).push(_createRoute());
       };
-
+    TextEditingController emailcontroller = new TextEditingController();
+    TextEditingController passwordcontroller = new TextEditingController();
     return Scaffold(
       appBar: AppBar(
           title: Text(
@@ -60,16 +62,37 @@ class _LoginPageState extends State<LoginPage> {
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: <Widget>[
-                    _textInput(hint: "Email", icon: Icons.person),
-                    _textInput(hint: "Password", icon: Icons.lock),
+                    _textInput(
+                        hint: "Email",
+                        icon: Icons.person,
+                        myController: emailcontroller,
+                        obscure: false),
+                    _textInput(
+                        hint: "Password",
+                        icon: Icons.lock,
+                        myController: passwordcontroller,
+                        obscure: true),
                     SizedBox(height: 20),
                     Center(
                       child: ButtonWidget(
-                        onClick: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => RegPage()));
+                        onClick: () async {
+                          try {
+                            UserCredential userCredential = await FirebaseAuth
+                                .instance
+                                .signInWithEmailAndPassword(
+                                    email: emailcontroller.text,
+                                    password: passwordcontroller.text);
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => RegPage()));
+                          } on FirebaseAuthException catch (e) {
+                            if (e.code == 'user-not-found') {
+                              print('No user found for that email.');
+                            } else if (e.code == 'wrong-password') {
+                              print('Wrong password provided for that user.');
+                            }
+                          }
                         },
                         btnText: "SIGN IN",
                       ),
@@ -110,20 +133,20 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget _textInput({controller, hint, icon}) {
+  Widget _textInput({hint, icon, myController, obscure}) {
     return Container(
       margin: EdgeInsets.only(top: 10),
       padding: EdgeInsets.only(left: 10),
       child: TextFormField(
-        controller: controller,
+        controller: myController,
         decoration: InputDecoration(
-          // border: InputBorder.none,
           border: new UnderlineInputBorder(
             borderSide: new BorderSide(),
           ),
           hintText: hint,
           prefixIcon: Icon(icon),
         ),
+        obscureText: obscure,
       ),
     );
   }

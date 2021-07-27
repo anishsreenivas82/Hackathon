@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 class HeaderContainer1 extends StatelessWidget {
   var text = "";
@@ -8,7 +9,6 @@ class HeaderContainer1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      
       color: Colors.lightBlueAccent,
       child: Column(
         children: <Widget>[
@@ -18,7 +18,7 @@ class HeaderContainer1 extends StatelessWidget {
             ),
           ),
           Center(
-            child: Image.asset("assets/logo.png"),
+            child: Lottie.asset('assets/lottie/lottie.json'),
           ),
           Center(
             child: Container(
@@ -74,11 +74,11 @@ class HeaderContainer1 extends StatelessWidget {
               ),
             ),
           ),
-           Center(
-              child: Container(
-                padding: const EdgeInsets.all(5),
-              ),
+          Center(
+            child: Container(
+              padding: const EdgeInsets.all(5),
             ),
+          ),
         ],
       ),
     );

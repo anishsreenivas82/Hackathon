@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutterlogindesign/pages/signin_page.dart';
 import 'package:flutterlogindesign/widgets/btn_widget.dart';
 import 'package:flutterlogindesign/widgets/Headdersignup.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 TapGestureRecognizer _signinConditionRecognizer;
 
@@ -18,6 +19,9 @@ class _RegPageState extends State<RegPage> {
       ..onTap = () {
         Navigator.pop(context);
       };
+    TextEditingController emailcontroller = new TextEditingController();
+    TextEditingController passwordcontroller = new TextEditingController();
+    TextEditingController phonecontroller = new TextEditingController();
     return Scaffold(
       appBar: AppBar(
           title: Text(
@@ -37,17 +41,43 @@ class _RegPageState extends State<RegPage> {
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: <Widget>[
-                    _textInput(hint: "Email", icon: Icons.person),
-                    _textInput(hint: "Password", icon: Icons.lock),
+                    _textInput(
+                        hint: "Email",
+                        icon: Icons.person,
+                        myController: emailcontroller,
+                        obscure: false),
+                    _textInput(
+                        hint: "Password",
+                        icon: Icons.lock,
+                        myController: passwordcontroller,
+                        obscure: true),
                     _textInput(
                         hint: "Phone Number",
-                        icon: Icons.phone_android_outlined),
+                        icon: Icons.phone_android_outlined,
+                        myController: phonecontroller,
+                        obscure: false),
                     SizedBox(height: 15),
                     Center(
                       child: ButtonWidget(
                         btnText: "SIGN UP",
-                        onClick: () {
-                          Navigator.pop(context);
+                        onClick: () async {
+                          try {
+                            UserCredential userCredential = await FirebaseAuth
+                                .instance
+                                .createUserWithEmailAndPassword(
+                                    email: emailcontroller.text,
+                                    password: passwordcontroller.text);
+                            Navigator.pop(context);
+                          } on FirebaseAuthException catch (e) {
+                            if (e.code == 'weak-password') {
+                              print('The password provided is too weak.');
+                            } else if (e.code == 'email-already-in-use') {
+                              print(
+                                  'The account already exists for that email.');
+                            }
+                          } catch (e) {
+                            print(e);
+                          }
                         },
                       ),
                     ),
@@ -76,12 +106,12 @@ class _RegPageState extends State<RegPage> {
     );
   }
 
-  Widget _textInput({controller, hint, icon}) {
+  Widget _textInput({hint, icon, myController, obscure}) {
     return Container(
       margin: EdgeInsets.only(top: 10),
       padding: EdgeInsets.only(left: 10),
       child: TextFormField(
-        controller: controller,
+        controller: myController,
         decoration: InputDecoration(
           border: new UnderlineInputBorder(
             borderSide: new BorderSide(),
@@ -89,6 +119,7 @@ class _RegPageState extends State<RegPage> {
           hintText: hint,
           prefixIcon: Icon(icon),
         ),
+        obscureText: obscure,
       ),
     );
   }
