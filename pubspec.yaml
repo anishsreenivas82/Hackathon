@@ -33,8 +33,12 @@ dependencies:
   lottie: ^0.6.0
   flutter_hooks: ^0.12.0
   firebase_auth: ^0.20.1
+<<<<<<< HEAD
   cloud_firestore: ^0.16.0+1
   flutter_barcode_scanner: ^2.0.0
+=======
+  flutter_barcode_scanner: ^1.0.1
+>>>>>>> 532d81a8f3ae1911685dd8e9c42986158694293c
 
 dev_dependencies:
   flutter_test:
