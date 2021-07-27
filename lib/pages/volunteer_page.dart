@@ -10,7 +10,7 @@ class Volunteer extends StatefulWidget {
 class _VolunteerState extends State<Volunteer> {
 
   int currentindex = 0;
-  final List children = [Text('Stats'),Column(children:[FloatingActionButton(onPressed:(){return qrscan();})]),Text('r')];
+  final List children = [Text('Stats'),Column(children:[FloatingActionButton(onPressed:(){return qrscan();})]),Text('r'),Text('r')];
   @override
   Widget build(BuildContext context) {
     return Scaffold(

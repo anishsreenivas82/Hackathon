@@ -25,125 +25,127 @@ class _SplashScreenState extends State<SplashScreen> {
             backgroundColor: Colors.blue),
         body: Padding(
           padding: EdgeInsets.only(bottom: 30),
-          child: Column(
-            children: [
-              SizedBox(
-                height: 100.00,
-              ),
-              Text('Choose your role: '),
-              SizedBox(
-                height: 100.00,
-              ),
-              Center(
-                child: Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(45, 45, 20, 45),
+          child: SingleChildScrollView(
                       child: Column(
-                        children: [
-                          Container(
-                            height: 100,
-                            width: 100,
-                            child: FittedBox(
-                              child: FloatingActionButton(
-                                  onPressed: () {
-                                    track
-                                        .doc("CollectionNumber")
-                                        .update({"Position": 1});
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => LoginPage()));
-                                  },
-                                  child: ConstrainedBox(
-                                    constraints: new BoxConstraints.expand(),
-                                    child: new Image.asset('assets/do.png',
-                                        fit: BoxFit.cover,
-                                        gaplessPlayback: true),
-                                  )),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 20.00,
-                          ),
-                          Text('Sign in as a Donor')
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(45, 45, 20, 45),
-                      child: Column(
-                        children: [
-                          Container(
-                            height: 100,
-                            width: 100,
-                            child: FittedBox(
-                              child: FloatingActionButton(
-                                  onPressed: () {
-                                    track
-                                        .doc("CollectionNumber")
-                                        .update({"Position": 2});
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => LoginPage()));
-                                  },
-                                  child: ConstrainedBox(
-                                    constraints: new BoxConstraints.expand(),
-                                    child: new Image.asset('assets/h1.png',
-                                        fit: BoxFit.cover,
-                                        gaplessPlayback: true),
-                                  )),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 20.00,
-                          ),
-                          Text('Sign in as a Reciver')
-                        ],
-                      ),
-                    ),
-                  ],
+              children: [
+                SizedBox(
+                  height: 100.00,
                 ),
-              ),
-              SizedBox(
-                height: 10.00,
-              ),
-              Center(
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(25, 25, 20, 45),
-                  child: Column(
+                Text('Choose your role: '),
+                SizedBox(
+                  height: 100.00,
+                ),
+                Center(
+                  child: Row(
                     children: [
-                      Container(
-                        height: 120,
-                        width: 120,
-                        child: FittedBox(
-                          child: FloatingActionButton(
-                              onPressed: () {
-                                track
-                                    .doc("CollectionNumber")
-                                    .update({"Position": 3});
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => LoginPage()));
-                              },
-                              child: ConstrainedBox(
-                                constraints: new BoxConstraints.expand(),
-                                child: new Image.asset('assets/3.png',
-                                    fit: BoxFit.cover, gaplessPlayback: true),
-                              )),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(45, 45, 20, 45),
+                        child: Column(
+                          children: [
+                            Container(
+                              height: 100,
+                              width: 100,
+                              child: FittedBox(
+                                child: FloatingActionButton(
+                                    onPressed: () {
+                                      track
+                                          .doc("CollectionNumber")
+                                          .update({"Position": 1});
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => LoginPage()));
+                                    },
+                                    child: ConstrainedBox(
+                                      constraints: new BoxConstraints.expand(),
+                                      child: new Image.asset('assets/do.png',
+                                          fit: BoxFit.cover,
+                                          gaplessPlayback: true),
+                                    )),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 20.00,
+                            ),
+                            Text('Sign in as a Donor')
+                          ],
                         ),
                       ),
-                      SizedBox(
-                        height: 20.00,
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(45, 45, 20, 45),
+                        child: Column(
+                          children: [
+                            Container(
+                              height: 100,
+                              width: 100,
+                              child: FittedBox(
+                                child: FloatingActionButton(
+                                    onPressed: () {
+                                      track
+                                          .doc("CollectionNumber")
+                                          .update({"Position": 2});
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => LoginPage()));
+                                    },
+                                    child: ConstrainedBox(
+                                      constraints: new BoxConstraints.expand(),
+                                      child: new Image.asset('assets/h1.png',
+                                          fit: BoxFit.cover,
+                                          gaplessPlayback: true),
+                                    )),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 20.00,
+                            ),
+                            Text('Sign in as a Reciver')
+                          ],
+                        ),
                       ),
-                      Text('Sign in as a Volunteer')
                     ],
                   ),
                 ),
-              )
-            ],
+                SizedBox(
+                  height: 10.00,
+                ),
+                Center(
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(25, 25, 20, 45),
+                    child: Column(
+                      children: [
+                        Container(
+                          height: 120,
+                          width: 120,
+                          child: FittedBox(
+                            child: FloatingActionButton(
+                                onPressed: () {
+                                  track
+                                      .doc("CollectionNumber")
+                                      .update({"Position": 3});
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => LoginPage()));
+                                },
+                                child: ConstrainedBox(
+                                  constraints: new BoxConstraints.expand(),
+                                  child: new Image.asset('assets/3.png',
+                                      fit: BoxFit.cover, gaplessPlayback: true),
+                                )),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 20.00,
+                        ),
+                        Text('Sign in as a Volunteer')
+                      ],
+                    ),
+                  ),
+                )
+              ],
+            ),
           ),
         ));
   }
