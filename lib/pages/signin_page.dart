@@ -6,6 +6,16 @@ import 'package:flutterlogindesign/widgets/Headdersignin.dart';
 import 'package:flutterlogindesign/widgets/btn_widget.dart';
 import 'package:flutterlogindesign/widgets/Headdersignup.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+import 'donor_dashboard.dart';
+
+// Future<DocumentSnapshot> getUserInfo() async {
+//   return await FirebaseFirestore.instance
+//       .collection("Tracker")
+//       .doc("CollectionNumber")
+//       .get();
+// }
 
 Route _createRoute() {
   return PageRouteBuilder(
@@ -28,6 +38,7 @@ Route _createRoute() {
   );
 }
 
+var choice;
 TapGestureRecognizer _signupConditionRecognizer;
 
 class LoginPage extends StatefulWidget {
@@ -44,6 +55,40 @@ class _LoginPageState extends State<LoginPage> {
       };
     TextEditingController emailcontroller = new TextEditingController();
     TextEditingController passwordcontroller = new TextEditingController();
+    // FutureBuilder(
+    //   future: getUserInfo(),
+    //   builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+    //     if (snapshot.connectionState == ConnectionState.done) {
+    //       return snapshot.data.data["Position"];
+    //     } else if (snapshot.connectionState == ConnectionState.none) {
+    //       return Text("No data");
+    //     }
+    //     return CircularProgressIndicator();
+    //   },
+    // );
+//     final String _collection = 'collectionName';
+// final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
+
+// getData() async {
+//   return await _fireStore.collection(_collection).doc('CollectionNumber');
+// }
+
+// getData().then((val){
+//   print(val.get().;
+// });
+    FirebaseFirestore.instance
+        .collection('Tracker')
+        .doc('CollectionNumber')
+        .get()
+        .then((DocumentSnapshot documentSnapshot) {
+      if (documentSnapshot.exists) {
+        // print('Document data: ${documentSnapshot.data()}');
+        choice = documentSnapshot.data().values.toString();
+      } else {
+        print('Document does not exist on the database');
+      }
+    });
+    // print(choice);
     return Scaffold(
       appBar: AppBar(
           title: Text(
@@ -83,10 +128,22 @@ class _LoginPageState extends State<LoginPage> {
                                 .signInWithEmailAndPassword(
                                     email: emailcontroller.text,
                                     password: passwordcontroller.text);
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Volunteer()));
+                            if (choice == "(1)") {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Donor()));
+                            } else if (choice == "(2)") {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Donor()));
+                            } else if (choice == "(3)") {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Volunteer()));
+                            }
                           } on FirebaseAuthException catch (e) {
                             if (e.code == 'user-not-found') {
                               print('No user found for that email.');

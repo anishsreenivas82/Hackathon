@@ -45,7 +45,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
             ),
             TweenAnimationBuilder(
                 child: Text(
-                  'Heygiene4you',
+                  'Here4Hygiene',
                   style: TextStyle(
                     fontSize: 30,
                     color: Colors.green[400],

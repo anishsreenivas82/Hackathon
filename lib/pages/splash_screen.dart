@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutterlogindesign/pages/signin_page.dart';
 import 'package:flutterlogindesign/pages/signup_page.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -10,6 +11,8 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
+    CollectionReference track =
+        FirebaseFirestore.instance.collection('Tracker');
     return Scaffold(
         appBar: AppBar(
             automaticallyImplyLeading:
@@ -44,6 +47,9 @@ class _SplashScreenState extends State<SplashScreen> {
                             child: FittedBox(
                               child: FloatingActionButton(
                                   onPressed: () {
+                                    track
+                                        .doc("CollectionNumber")
+                                        .update({"Position": 1});
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
@@ -74,6 +80,9 @@ class _SplashScreenState extends State<SplashScreen> {
                             child: FittedBox(
                               child: FloatingActionButton(
                                   onPressed: () {
+                                    track
+                                        .doc("CollectionNumber")
+                                        .update({"Position": 2});
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
@@ -111,6 +120,9 @@ class _SplashScreenState extends State<SplashScreen> {
                         child: FittedBox(
                           child: FloatingActionButton(
                               onPressed: () {
+                                track
+                                    .doc("CollectionNumber")
+                                    .update({"Position": 3});
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
