@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterlogindesign/pages/signin_page.dart';
+import 'package:flutterlogindesign/pages/volunteer_page.dart';
 import 'package:flutterlogindesign/widgets/btn_widget.dart';
 import 'package:flutterlogindesign/widgets/Headdersignup.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -67,7 +68,10 @@ class _RegPageState extends State<RegPage> {
                                 .createUserWithEmailAndPassword(
                                     email: emailcontroller.text,
                                     password: passwordcontroller.text);
-                            Navigator.pop(context);
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Volunteer()));
                           } on FirebaseAuthException catch (e) {
                             if (e.code == 'weak-password') {
                               print('The password provided is too weak.');

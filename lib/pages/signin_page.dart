@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterlogindesign/pages/signup_page.dart';
+import 'package:flutterlogindesign/pages/volunteer_page.dart';
 import 'package:flutterlogindesign/widgets/Headdersignin.dart';
 import 'package:flutterlogindesign/widgets/btn_widget.dart';
 import 'package:flutterlogindesign/widgets/Headdersignup.dart';
@@ -85,7 +86,7 @@ class _LoginPageState extends State<LoginPage> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => RegPage()));
+                                    builder: (context) => Volunteer()));
                           } on FirebaseAuthException catch (e) {
                             if (e.code == 'user-not-found') {
                               print('No user found for that email.');
