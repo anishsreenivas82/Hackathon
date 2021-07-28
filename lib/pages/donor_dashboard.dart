@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutterlogindesign/pages/signin_page.dart';
+import 'package:flutterlogindesign/pages/item_page.dart';
 import 'package:flutterlogindesign/pages/signup_page.dart';
+import 'package:flutterlogindesign/pages/previous_orders.dart';
 
 class Donor extends StatefulWidget {
   @override
@@ -40,7 +42,12 @@ class _DonorState extends State<Donor> {
                         children: <Widget>[
                           TextButton(
                             child: const Text('Proceed'),
-                            onPressed: () {/* ... */},
+                            onPressed: () {
+                                Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Itempage()));
+                            },
                           ),
                           const SizedBox(width: 8),
                         ],
@@ -99,7 +106,10 @@ class _DonorState extends State<Donor> {
                         children: <Widget>[
                           TextButton(
                             child: const Text('View'),
-                            onPressed: () {/* ... */},
+                            onPressed: () {
+                               return getData();
+
+                            },
                           ),
                           const SizedBox(width: 8),
                         ],
