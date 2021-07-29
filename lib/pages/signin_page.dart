@@ -39,6 +39,7 @@ Route _createRoute() {
 }
 
 var choice;
+var check;
 TapGestureRecognizer _signupConditionRecognizer;
 
 class LoginPage extends StatefulWidget {
@@ -128,21 +129,71 @@ class _LoginPageState extends State<LoginPage> {
                                 .signInWithEmailAndPassword(
                                     email: emailcontroller.text,
                                     password: passwordcontroller.text);
+                            var uid = FirebaseAuth.instance.currentUser.uid;
+
                             if (choice == "(1)") {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => Donor()));
+                              FirebaseFirestore.instance
+                                  .collection('Owners')
+                                  .doc(uid)
+                                  .get()
+                                  .then((DocumentSnapshot documentSnapshot) {
+                                if (documentSnapshot.exists) {
+                                  check = documentSnapshot.get("choice");
+                                } else {
+                                  check = '0';
+                                }
+                              });
+                              if (check == "(1)") {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Donor()));
+                              } else {
+                                FirebaseAuth.instance.signOut();
+                                print("No account found");
+                              }
                             } else if (choice == "(2)") {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => Donor()));
+                              FirebaseFirestore.instance
+                                  .collection('Shelter')
+                                  .doc(uid)
+                                  .get()
+                                  .then((DocumentSnapshot documentSnapshot) {
+                                if (documentSnapshot.exists) {
+                                  check = documentSnapshot.get("choice");
+                                } else {
+                                  check = '0';
+                                }
+                              });
+                              if (check == "(2)") {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Donor()));
+                              } else {
+                                FirebaseAuth.instance.signOut();
+                                print("No account found");
+                              }
                             } else if (choice == "(3)") {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => Volunteer()));
+                              FirebaseFirestore.instance
+                                  .collection('Volunteer')
+                                  .doc(uid)
+                                  .get()
+                                  .then((DocumentSnapshot documentSnapshot) {
+                                if (documentSnapshot.exists) {
+                                  check = documentSnapshot.get("choice");
+                                } else {
+                                  check = '0';
+                                }
+                              });
+                              if (check == "(3)") {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Volunteer()));
+                              } else {
+                                FirebaseAuth.instance.signOut();
+                                print("No account found");
+                              }
                             }
                           } on FirebaseAuthException catch (e) {
                             if (e.code == 'user-not-found') {

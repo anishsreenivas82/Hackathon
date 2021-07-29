@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutterlogindesign/pages/donor_dashboard.dart';
 import 'package:flutterlogindesign/pages/qr.dart';
 
 String generatedID;
@@ -15,12 +16,9 @@ class Itempage extends StatefulWidget {
 }
 
 class _State extends State<Itempage> {
-  CollectionReference track = FirebaseFirestore.instance.collection('Tracker');
-
   final name = TextEditingController();
   final quantity = TextEditingController();
   final type = TextEditingController();
-  
 
   CollectionReference x = FirebaseFirestore.instance.collection('Owners');
 
@@ -62,7 +60,7 @@ class _State extends State<Itempage> {
           ),
           FloatingActionButton(
             onPressed: () {
-              x.doc('aNB4jygQ73cuR5BhdwP7').collection('items').add({
+              x.doc(uidDonor).collection('items').add({
                 'Name': name.text,
                 'Type': type.text,
                 'Quantity': quantity.text
@@ -74,9 +72,7 @@ class _State extends State<Itempage> {
               });
 
               Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Qrcode()));
+                  context, MaterialPageRoute(builder: (context) => Qrcode()));
             },
             child: Text('Add'),
           )

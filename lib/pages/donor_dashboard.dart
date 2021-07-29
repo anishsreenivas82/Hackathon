@@ -1,8 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterlogindesign/pages/signin_page.dart';
 import 'package:flutterlogindesign/pages/item_page.dart';
 import 'package:flutterlogindesign/pages/signup_page.dart';
-import 'package:flutterlogindesign/pages/previous_orders.dart';
+import 'package:flutterlogindesign/pages/pending_orders.dart';
+
+FirebaseAuth auth = FirebaseAuth.instance;
+var uidDonor = auth.currentUser.uid;
 
 class Donor extends StatefulWidget {
   @override
@@ -43,10 +47,10 @@ class _DonorState extends State<Donor> {
                           TextButton(
                             child: const Text('Proceed'),
                             onPressed: () {
-                                Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Itempage()));
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Itempage()));
                             },
                           ),
                           const SizedBox(width: 8),
@@ -107,8 +111,10 @@ class _DonorState extends State<Donor> {
                           TextButton(
                             child: const Text('View'),
                             onPressed: () {
-                               return getData();
-
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => PendingOrders()));
                             },
                           ),
                           const SizedBox(width: 8),

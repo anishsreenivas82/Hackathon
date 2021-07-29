@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterlogindesign/pages/signin_page.dart';
@@ -5,6 +6,8 @@ import 'package:flutterlogindesign/pages/volunteer_page.dart';
 import 'package:flutterlogindesign/widgets/btn_widget.dart';
 import 'package:flutterlogindesign/widgets/Headdersignup.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+
+import 'donor_dashboard.dart';
 
 TapGestureRecognizer _signinConditionRecognizer;
 
@@ -23,6 +26,18 @@ class _RegPageState extends State<RegPage> {
     TextEditingController emailcontroller = new TextEditingController();
     TextEditingController passwordcontroller = new TextEditingController();
     TextEditingController phonecontroller = new TextEditingController();
+    String id;
+    FirebaseFirestore.instance
+        .collection('Tracker')
+        .doc('CollectionNumber')
+        .get()
+        .then((DocumentSnapshot documentSnapshot) {
+      if (documentSnapshot.exists) {
+        choice = documentSnapshot.data().values.toString();
+      } else {
+        print('Document does not exist on the database');
+      }
+    });
     return Scaffold(
       appBar: AppBar(
           title: Text(
@@ -68,10 +83,47 @@ class _RegPageState extends State<RegPage> {
                                 .createUserWithEmailAndPassword(
                                     email: emailcontroller.text,
                                     password: passwordcontroller.text);
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Volunteer()));
+                            var uid = FirebaseAuth.instance.currentUser.uid;
+                            if (choice == "(1)") {
+                              FirebaseFirestore.instance
+                                  .collection('Owners')
+                                  .doc(uid)
+                                  .set({
+                                'Email': emailcontroller.text,
+                                'Password': passwordcontroller.text,
+                                'choice': choice,
+                              });
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Donor()));
+                            } else if (choice == "(2)") {
+                              FirebaseFirestore.instance
+                                  .collection('Shelter')
+                                  .doc(uid)
+                                  .set({
+                                'Email': emailcontroller.text,
+                                'Password': passwordcontroller.text,
+                                'choice': choice,
+                              });
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Donor()));
+                            } else if (choice == "(3)") {
+                              FirebaseFirestore.instance
+                                  .collection('Volunteer')
+                                  .doc(uid)
+                                  .set({
+                                'Email': emailcontroller.text,
+                                'Password': passwordcontroller.text,
+                                'choice': choice,
+                              });
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Volunteer()));
+                            }
                           } on FirebaseAuthException catch (e) {
                             if (e.code == 'weak-password') {
                               print('The password provided is too weak.');
