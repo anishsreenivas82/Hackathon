@@ -1,8 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:flutterlogindesign/pages/qrscan.dart';
+import 'package:flutterlogindesign/pages/splash_screen.dart';
 import 'package:flutterlogindesign/pages/verification.dart';
 
 class Volunteer extends StatefulWidget {
@@ -26,6 +28,30 @@ class _VolunteerState extends State<Volunteer> {
       appBar: AppBar(
        title: Text('My Flutter App'),
      ),
+     drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            DrawerHeader(
+              child: Text('Here 4 Hygiene'),
+              decoration: BoxDecoration(color: Colors.blue),
+            ),
+            ListTile(
+              title: Text('Location'),
+              leading: Icon(Icons.map_outlined),
+            ),
+            ListTile(
+              title: Text('Logout'),
+              leading: Icon(Icons.logout),
+              onTap: (){ FirebaseAuth.instance.signOut();
+              Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => SplashScreen()));}
+            )
+          ],
+        ),
+      ),
      body: children[currentindex], // new
      bottomNavigationBar: BottomNavigationBar(
        type: BottomNavigationBarType.fixed,
