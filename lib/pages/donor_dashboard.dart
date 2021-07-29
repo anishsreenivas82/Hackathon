@@ -41,7 +41,7 @@ class _DonorState extends State<Donor> {
         ),
       ),
       body: SingleChildScrollView(
-              child: Column(
+        child: Column(
           children: [
             Container(
               height: MediaQuery.of(context).size.height * 0.10,
@@ -131,7 +131,10 @@ class _DonorState extends State<Donor> {
                             TextButton(
                               child: const Text('View'),
                               onPressed: () {
-                                return getData();
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => PendingOrders()));
                               },
                             ),
                             const SizedBox(width: 8),

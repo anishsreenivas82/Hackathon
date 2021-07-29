@@ -65,7 +65,7 @@ class _State extends State<Itempage> {
                 'Type': type.text,
                 'Quantity': quantity.text
               }).then((querySnapshot) {
-                // Here whe call the document just after creation
+                // Here we call the document just after creation
 
                 generatedID = querySnapshot.id
                     .toString(); // Here we call the ID of the document

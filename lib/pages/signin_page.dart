@@ -10,13 +10,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'donor_dashboard.dart';
 
-// Future<DocumentSnapshot> getUserInfo() async {
-//   return await FirebaseFirestore.instance
-//       .collection("Tracker")
-//       .doc("CollectionNumber")
-//       .get();
-// }
-
+//to push
 Route _createRoute() {
   return PageRouteBuilder(
     pageBuilder: (context, animation, secondaryAnimation) => RegPage(),
