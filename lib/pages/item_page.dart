@@ -93,8 +93,9 @@ class _State extends State<Itempage> {
                 }).then((querySnapshot) {
                   // Here we call the document just after creation
 
-                  String generatedID = querySnapshot.id.toString() +
+                   generatedID = querySnapshot.id.toString() +
                       uidDonor.toString(); // Here we call the ID of the document
+                      
                 });
 
                 Navigator.push(

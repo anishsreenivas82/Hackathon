@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutterlogindesign/pages/shelter_page.dart';
 import 'package:flutterlogindesign/pages/signup_page.dart';
 import 'package:flutterlogindesign/pages/volunteer_page.dart';
 import 'package:flutterlogindesign/widgets/Headdersignin.dart';
@@ -162,7 +163,7 @@ class _LoginPageState extends State<LoginPage> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => Donor()));
+                                        builder: (context) => Shelter_page  ()));
                               } else {
                                 FirebaseAuth.instance.signOut();
                                 print("No account found");

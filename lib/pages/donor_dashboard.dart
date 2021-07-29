@@ -4,6 +4,9 @@ import 'package:flutterlogindesign/pages/signin_page.dart';
 import 'package:flutterlogindesign/pages/item_page.dart';
 import 'package:flutterlogindesign/pages/signup_page.dart';
 import 'package:flutterlogindesign/pages/pending_orders.dart';
+import 'package:flutterlogindesign/pages/splash_screen.dart';
+import 'package:flutterlogindesign/pages/verification.dart';
+import 'package:flutterlogindesign/pages/verifieditems.dart';
 
 FirebaseAuth auth = FirebaseAuth.instance;
 var uidDonor = auth.currentUser.uid;
@@ -36,6 +39,11 @@ class _DonorState extends State<Donor> {
             ListTile(
               title: Text('Logout'),
               leading: Icon(Icons.logout),
+              onTap: (){ FirebaseAuth.instance.signOut();
+              Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => SplashScreen()));}
             )
           ],
         ),
@@ -100,7 +108,10 @@ class _DonorState extends State<Donor> {
                           children: <Widget>[
                             TextButton(
                               child: const Text('View'),
-                              onPressed: () {/* ... */},
+                              onPressed: () {
+                                Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => Verified()));
+                              },
                             ),
                             const SizedBox(width: 8),
                           ],

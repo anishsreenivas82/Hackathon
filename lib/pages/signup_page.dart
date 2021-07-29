@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutterlogindesign/pages/shelter_page.dart';
 import 'package:flutterlogindesign/pages/signin_page.dart';
 import 'package:flutterlogindesign/pages/volunteer_page.dart';
 import 'package:flutterlogindesign/widgets/btn_widget.dart';
@@ -109,7 +110,7 @@ class _RegPageState extends State<RegPage> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => Donor()));
+                                      builder: (context) => Shelter_page()));
                             } else if (choice == "(3)") {
                               FirebaseFirestore.instance
                                   .collection('Volunteer')
