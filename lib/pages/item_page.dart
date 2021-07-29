@@ -19,6 +19,7 @@ class _State extends State<Itempage> {
   final name = TextEditingController();
   final quantity = TextEditingController();
   final type = TextEditingController();
+  final baby = TextEditingController();
 
   CollectionReference x = FirebaseFirestore.instance.collection('Owners');
 
@@ -31,52 +32,78 @@ class _State extends State<Itempage> {
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
     return Scaffold(
+      backgroundColor: Colors.amber[100],
       appBar: AppBar(
         backgroundColor: Colors.blue,
         title: Text('Itempage'),
         centerTitle: true,
       ),
-      body: Column(
-        children: [
-          TextField(
-            controller: name,
-            decoration: InputDecoration(
-                border: OutlineInputBorder(), hintText: 'Enter Product Name'),
-          ),
-          TextField(
-            controller: quantity,
-            decoration: InputDecoration(
-                border: OutlineInputBorder(), hintText: 'Enter the Quantity'),
-          ),
-          TextField(
-            decoration: InputDecoration(
-                border: OutlineInputBorder(), hintText: 'Is it a baby Porduct'),
-          ),
-          TextField(
-            controller: type,
-            decoration:
-                InputDecoration(border: OutlineInputBorder(), hintText: 'Type'),
-          ),
-          FloatingActionButton(
-            onPressed: () {
-              x.doc(uidDonor).collection('items').add({
-                'Name': name.text,
-                'Type': type.text,
-                'Quantity': quantity.text
-              }).then((querySnapshot) {
-                // Here we call the document just after creation
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Padding(
+              padding: EdgeInsets.fromLTRB(
+                  width * 0.01, height * 0.01, width * 0.01, height * 0.01),
+              child: TextField(
+                controller: name,
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: 'Enter Product Name'),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.fromLTRB(
+                  width * 0.01, height * 0.01, width * 0.01, height * 0.01),
+              child: TextField(
+                controller: quantity,
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: 'Enter the Quantity'),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.fromLTRB(
+                  width * 0.01, height * 0.01, width * 0.01, height * 0.01),
+              child: TextField(
+                controller: baby,
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: 'Is it a baby Porduct(yes or no)'),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.fromLTRB(
+                  width * 0.01, height * 0.01, width * 0.01, height * 0.01),
+              child: TextField(
+                controller: type,
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(), hintText: 'Type'),
+              ),
+            ),
+            FloatingActionButton(
+              onPressed: () {
+                x.doc(uidDonor).collection('items').add({
+                  'Name': name.text,
+                  'Type': type.text,
+                  'Quantity': quantity.text,
+                  'Baby': baby.text
+                }).then((querySnapshot) {
+                  // Here we call the document just after creation
 
-                generatedID = querySnapshot.id
-                    .toString(); // Here we call the ID of the document
-              });
+                  String generatedID = querySnapshot.id.toString() +
+                      uidDonor.toString(); // Here we call the ID of the document
+                });
 
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => Qrcode()));
-            },
-            child: Text('Add'),
-          )
-        ],
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => Qrcode()));
+              },
+              child: Text('Add'),
+            )
+          ],
+        ),
       ),
     );
   }
