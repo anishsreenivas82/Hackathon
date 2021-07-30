@@ -19,8 +19,11 @@ class Donor extends StatefulWidget {
 class _DonorState extends State<Donor> {
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
     print(uidDonor);
     return Scaffold(
+      backgroundColor: Colors.amber[100],
       appBar: AppBar(
         title: Text("Dashboard"),
         centerTitle: true,
@@ -53,11 +56,15 @@ class _DonorState extends State<Donor> {
           children: [
             Container(
               height: MediaQuery.of(context).size.height * 0.10,
+              
             ),
             Container(
                 height: MediaQuery.of(context).size.height * 0.23,
                 child: Center(
                   child: Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(width*0.1)
+                    ),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
@@ -92,6 +99,9 @@ class _DonorState extends State<Donor> {
                 height: MediaQuery.of(context).size.height * 0.23,
                 child: Center(
                   child: Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(width*0.1)
+                    ),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
@@ -126,9 +136,14 @@ class _DonorState extends State<Donor> {
                 height: MediaQuery.of(context).size.height * 0.23,
                 child: Center(
                   child: Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(width*0.1)
+                    ),  
                     child: Column(
+                    
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
+                        SizedBox(height:8),
                         const ListTile(
                           leading: Icon(
                             Icons.history,

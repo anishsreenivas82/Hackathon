@@ -25,11 +25,11 @@ class _State extends State<Qrcode> {
                     child: Container(
                       height: MediaQuery.of(context).size.height*0.4,
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: Colors.amber[800],
                       ),
                       child: BarcodeWidget(
           barcode: Barcode.qrCode(),
-          color: Colors.white,
+          color: Colors.black,
           data: generatedID ?? "Hello World",
           width: 200,
           height: 200,

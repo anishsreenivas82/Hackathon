@@ -10,6 +10,7 @@ import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:flutterlogindesign/pages/qr.dart';
 
 import 'package:flutterlogindesign/pages/volunteer_page.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 String doc;
 String uid;
@@ -80,10 +81,14 @@ return await FirebaseFirestore.instance.collection("Owners").doc(uid).collection
             future: getUserInfo(),
             builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
+                name = snapshot.data['Name'];
+                type = snapshot.data['Type'];
+                babyproduct = snapshot.data['Baby'];
+                quantity = snapshot.data['Quantity'];
 
                 
                 return  Scaffold(
-                  backgroundColor: Colors.amber[100],
+                    backgroundColor: Colors.amber[100],
       appBar: AppBar(
         backgroundColor: Colors.black,
         title: Text('VerifcationPage'),
@@ -144,18 +149,18 @@ return await FirebaseFirestore.instance.collection("Owners").doc(uid).collection
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                  child: Wrap(children: [Text('Are the products sealed?',style: TextStyle(fontSize: 18),)]),
-                  width: width * 0.8),
+                    child: Wrap(children: [Text('Are the products sealed?',style: TextStyle(fontSize: 18),)]),
+                    width: width * 0.8),
               Radio(
-                  value: 1,
-                  groupValue: radio1,
-                  onChanged: (value) {
-                    setState(() {
-                      radio1 = value;
+                    value: 1,
+                    groupValue: radio1,
+                    onChanged: (value) {
+                      setState(() {
+                        radio1 = value;
 
-                      i++;
-                    });
-                  })
+                        i++;
+                      });
+                    })
             ],
           ),
           SizedBox(height: 20),
@@ -164,19 +169,19 @@ return await FirebaseFirestore.instance.collection("Owners").doc(uid).collection
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                  child: Wrap(children: [
-                    Text('Do the products have atleast 2 weeks before expiry?',style: TextStyle(fontSize: 18),)
-                  ]),
-                  width: width * 0.8),
+                    child: Wrap(children: [
+                      Text('Do the products have atleast 2 weeks before expiry?',style: TextStyle(fontSize: 18),)
+                    ]),
+                    width: width * 0.8),
               Radio(
-                  value: 2,
-                  groupValue: radio2,
-                  onChanged: (value) {
-                    setState(() {
-                      radio2 = value;
-                      i++;
-                    });
-                  })
+                    value: 2,
+                    groupValue: radio2,
+                    onChanged: (value) {
+                      setState(() {
+                        radio2 = value;
+                        i++;
+                      });
+                    })
             ],
           ),
           SizedBox(height: 20),
@@ -185,19 +190,19 @@ return await FirebaseFirestore.instance.collection("Owners").doc(uid).collection
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                  child: Wrap(children: [
-                    Text('Do the products match the description above?',style: TextStyle(fontSize: 18),)
-                  ]),
-                  width: width * 0.8),
+                    child: Wrap(children: [
+                      Text('Do the products match the description above?',style: TextStyle(fontSize: 18),)
+                    ]),
+                    width: width * 0.8),
               Radio(
-                  value: 3,
-                  groupValue: radio3,
-                  onChanged: (value) {
-                    setState(() {
-                      radio3 = value;
-                      i++;
-                    });
-                  })
+                    value: 3,
+                    groupValue: radio3,
+                    onChanged: (value) {
+                      setState(() {
+                        radio3 = value;
+                        i++;
+                      });
+                    })
             ],
           ),
           SizedBox(height: 20),
@@ -206,36 +211,54 @@ return await FirebaseFirestore.instance.collection("Owners").doc(uid).collection
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               TextButton(
-                  onPressed: () {
-                    a.doc('donations').collection('donations').doc(doc).set({
-                      'Name': name,
-                      'Type': type,
-                      'Quantity': quantity,
-                      'Baby': babyproduct,
-                      'Status': 'Verified',
-                    });
-                    
-                    b.doc(uid).collection('verified items').doc(doc).set({
-                      'Name': name,
-                      'Type': type,
-                      'Quantity': quantity,
-                      'Baby': babyproduct,
-                      'Status': 'Verified',
-                    });
+                    onPressed: () {if(i>=3){
+                      a.doc('donations').collection('donations').doc(doc).set({
+                        'Name': name,
+                        'Type': type,
+                        'Quantity': quantity,
+                        'Baby': babyproduct,
+                        'Status': 'Verified',
+                      });
+                      
+                      b.doc(uid).collection('verified items').doc(doc).set({
+                        'Name': name,
+                        'Type': type,
+                        'Quantity': quantity,
+                        'Baby': babyproduct,
+                        'Status': 'Verified',
+                      });
 
-                    b.doc(uid).collection('items').doc(doc).delete();
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Volunteer()));
-                  },
-                  child: Text('Accept',style: TextStyle(fontSize: 25,color: Colors.green),)),
+                      b.doc(uid).collection('items').doc(doc).delete();
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Volunteer()));
+                    }
+                    else
+                    {
+                      Fluttertoast.showToast(msg:"The product cannot be accepted",toastLength: Toast.LENGTH_LONG,
+                                  gravity: ToastGravity.BOTTOM,
+                                  timeInSecForIosWeb: 1,
+                                  backgroundColor: Colors.red,
+                                  textColor: Colors.black,
+                                  fontSize: 16.0);
+                    }
+                    },
+                    child: Text('Accept',style: TextStyle(fontSize: 25,color: Colors.green),)),
               TextButton(
-                
-                  onPressed: () {
-                    b.doc(uid).collection('items').doc(doc).delete();
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Volunteer()));
-                  },
-                  child: Text('Reject',style: TextStyle(fontSize: 25,color: Colors.red),))
+                  
+                    onPressed: () {
+                      if(i>=3){Fluttertoast.showToast(msg: 'The product cannot be rejected',toastLength: Toast.LENGTH_LONG,
+                                  gravity: ToastGravity.BOTTOM,
+                                  timeInSecForIosWeb: 1,
+                                  backgroundColor: Colors.red,
+                                  textColor: Colors.white,
+                                  fontSize: 16.0);}
+                      else{
+                      b.doc(uid).collection('items').doc(doc).delete();
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Volunteer()));
+                      }
+                    },
+                    child: Text('Reject',style: TextStyle(fontSize: 25,color: Colors.red),))
             ],
           )
 
@@ -262,7 +285,8 @@ return await FirebaseFirestore.instance.collection("Owners").doc(uid).collection
   Future<void> qrscan() async {
     try {
       qr_code = await FlutterBarcodeScanner.scanBarcode(
-          '#ff6666', 'Cancel', true, ScanMode.QR);
+          '#ff6666','Cancel', true, ScanMode.QR);
+          
           setState(() {
             return;
           });
