@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
-import 'package:flutterlogindesign/pages/qrscan.dart';
+
 import 'package:flutterlogindesign/pages/splash_screen.dart';
 import 'package:flutterlogindesign/pages/verification.dart';
 
