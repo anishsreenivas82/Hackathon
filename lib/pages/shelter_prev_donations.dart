@@ -50,7 +50,6 @@ class _Shelter_PrevState extends State<Shelter_Prev> {
                       width * 0.01, height * 0.01, width * 0.01, height * 0.01),
                   child: Container(
                     child: new Card(
-                      
                       elevation: 20,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(width*0.1),

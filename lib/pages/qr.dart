@@ -12,11 +12,11 @@ class Qrcode extends StatefulWidget {
 class _State extends State<Qrcode> {
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
+    double height = MediaQuery.of(context).size.height;
     return Scaffold(
         backgroundColor: Colors.amber[800],
         body: SingleChildScrollView(
-                  child: SafeArea(
+          child: SafeArea(
             child: Padding(
               padding: EdgeInsets.fromLTRB(0, height*0.3,0, height*0.01),
                           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
@@ -34,33 +34,34 @@ class _State extends State<Qrcode> {
           width: 200,
           height: 200,
                       ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: height*0.2
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-          FloatingActionButton(
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => Itempage()));
-              },
-              child: Text('Add'),
+                    )),
+                    SizedBox(height: height*0.2),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        FloatingActionButton(
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Itempage()));
+                          },
+                          child: Text('Add'),
+                        ),
+                        FloatingActionButton(
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Donor()));
+                            },
+                            child: Text('Finish'))
+                      ],
+                    )
+                  ]),
+            ),
           ),
-          FloatingActionButton(
-                onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Donor()));
-                },
-                child: Text('Finish'))
-                    ],
-                  )
-                ]),
-            ),
-            ),
         ));
   }
 }

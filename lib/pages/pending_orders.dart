@@ -17,28 +17,24 @@ class _PendingOrdersState extends State<PendingOrders> {
       .collection('items')
       .snapshots();
 
-  
-
   @override
   Widget build(BuildContext context) {
-
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Colors.amber[100],
       appBar: AppBar(title: Text('Pending Verification'),centerTitle: true,backgroundColor: Colors.blue,),
       body: SafeArea(
-              child: StreamBuilder<QuerySnapshot>(
+        child: StreamBuilder<QuerySnapshot>(
           stream: _PendingOrderStream,
-          builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          builder:
+              (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.hasError) {
               return Text('Something went wrong');
             }
-
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Text("Loading");
             }
-
             return new ListView(
               children: snapshot.data.docs.map((DocumentSnapshot document) {
                 Map<String, dynamic> data =

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +7,9 @@ import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 
 import 'package:flutterlogindesign/pages/splash_screen.dart';
 import 'package:flutterlogindesign/pages/verification.dart';
+
+FirebaseAuth auth = FirebaseAuth.instance;
+var uidVolunteer = auth.currentUser.uid;
 
 class Volunteer extends StatefulWidget {
   @override
@@ -29,29 +33,157 @@ class _VolunteerState extends State<Volunteer> {
   // }
 
   int currentindex = 0;
-
+  final Stream<QuerySnapshot> _PendingVerifyStream = FirebaseFirestore.instance
+      .collection('Volunteer')
+      .doc('pending verifications')
+      .collection('pending verifications')
+      .snapshots();
+  final Stream<QuerySnapshot> _AcceptedVerifyStream = FirebaseFirestore.instance
+      .collection('Volunteer')
+      .doc(uidVolunteer)
+      .collection('accepted verifications')
+      .snapshots();
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
     final List children = [
-      Text('Stats'),
-      Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-          
-          children: [
-          ElevatedButton(
-              child: Text(
-                'QR Scanner',
-                style: TextStyle(fontSize: 25, color: Colors.white),
-              ),
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => VerifcationPage()));
-              })
-        ]),
+      StreamBuilder<QuerySnapshot>(
+        stream: _PendingVerifyStream,
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if (snapshot.hasError) {
+            return Text('Something went wrong');
+          }
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Text("Loading");
+          }
+          return new ListView(
+            children: snapshot.data.docs.map((DocumentSnapshot document) {
+              Map<String, dynamic> data =
+                  document.data() as Map<String, dynamic>;
+              return Container(
+                height: height * 0.25,
+                padding: EdgeInsets.fromLTRB(
+                    width * 0.01, height * 0.01, width * 0.01, height * 0.01),
+                child: new Card(
+                  child: InkWell(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Text(
+                          'Item Name-' + data['Name'].toString(),
+                          style: TextStyle(fontSize: 15),
+                        ),
+                        Text(
+                          'Address-' + data['Address'].toString(),
+                          style: TextStyle(fontSize: 15),
+                        ),
+                        Text(
+                          'Phone Number-' + data['Phno'].toString(),
+                          style: TextStyle(fontSize: 15),
+                        ),
+                        // Row(
+                        //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        //   children: [
+                        //   Text('Quantity-'+ data['Quantity'].toString(),
+                        //   style: TextStyle(fontSize: 15),),
+                        //   Text('Baby Product-'+ data['Baby'].toString(),
+                        //   style: TextStyle(fontSize: 15),)
+                        // ])
+                      ],
+                    ),
+                    onTap: () => {
+                      FirebaseFirestore.instance
+                          .collection('Volunteer')
+                          .doc(uidVolunteer)
+                          .collection('accepted verifications')
+                          .add({
+                        'Name': data['Name'].toString(),
+                        'Address': data['Address'].toString(),
+                        'Phno': data['Phno'].toString(),
+                      }).then((value) => FirebaseFirestore.instance
+                              .collection('Volunteer')
+                              .doc('pending verifications')
+                              .collection('pending verifications')
+                              .doc(document.id)
+                              .delete()),
+                      // generatedID = document.id.toString() + uidDonor.toString(),
+                      // Navigator.push(context,
+                      //     MaterialPageRoute(builder: (context) => Qrcode()))
+                    },
+                  ),
+                  // title: new Text(data['Name'].toString()),
+                  // subtitle: new Text(data['Type'].toString()),
+                ),
+              );
+            }).toList(),
+          );
+        },
       ),
-      Text('r'),
-      Text('r')
+      Column(children: [
+        FloatingActionButton(onPressed: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => VerifcationPage()));
+        })
+      ]),
+      StreamBuilder<QuerySnapshot>(
+        stream: _AcceptedVerifyStream,
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if (snapshot.hasError) {
+            return Text('Something went wrong');
+          }
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Text("Loading");
+          }
+          return new ListView(
+            children: snapshot.data.docs.map((DocumentSnapshot document) {
+              Map<String, dynamic> data =
+                  document.data() as Map<String, dynamic>;
+              return Container(
+                height: height * 0.25,
+                padding: EdgeInsets.fromLTRB(
+                    width * 0.01, height * 0.01, width * 0.01, height * 0.01),
+                child: new Card(
+                  child: InkWell(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Text(
+                          'Item Name-' + data['Name'].toString(),
+                          style: TextStyle(fontSize: 15),
+                        ),
+                        Text(
+                          'Address-' + data['Address'].toString(),
+                          style: TextStyle(fontSize: 15),
+                        ),
+                        Text(
+                          'Phone Number-' + data['Phno'].toString(),
+                          style: TextStyle(fontSize: 15),
+                        ),
+                        // Row(
+                        //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        //   children: [
+                        //   Text('Quantity-'+ data['Quantity'].toString(),
+                        //   style: TextStyle(fontSize: 15),),
+                        //   Text('Baby Product-'+ data['Baby'].toString(),
+                        //   style: TextStyle(fontSize: 15),)
+                        // ])
+                      ],
+                    ),
+                    // onTap: () => {
+                    //   // generatedID = document.id.toString() + uidDonor.toString(),
+                    //   // Navigator.push(context,
+                    //   //     MaterialPageRoute(builder: (context) => Qrcode()))
+                    // },
+                  ),
+                  // title: new Text(data['Name'].toString()),
+                  // subtitle: new Text(data['Type'].toString()),
+                ),
+              );
+            }).toList(),
+          );
+        },
+      ),
     ];
 
     return Scaffold(
@@ -98,6 +230,10 @@ class _VolunteerState extends State<Volunteer> {
           new BottomNavigationBarItem(
             icon: Icon(Icons.qr_code_scanner),
             label: ('QR Scan'),
+          ),
+          new BottomNavigationBarItem(
+            icon: Icon(Icons.check),
+            label: ('Accepted'),
           ),
           //  new BottomNavigationBarItem(
           //    icon: Icon(Icons.person),

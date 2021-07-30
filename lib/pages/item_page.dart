@@ -8,6 +8,7 @@ import 'package:flutterlogindesign/pages/qr.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 String generatedID;
+var address, phoneNumber;
 
 class Itempage extends StatefulWidget {
   // const ({ Key? key }) : super(key: key);
@@ -23,7 +24,7 @@ class _State extends State<Itempage> {
   final baby = TextEditingController();
 
   CollectionReference x = FirebaseFirestore.instance.collection('Owners');
-
+  CollectionReference y = FirebaseFirestore.instance.collection('Volunteer');
   @override
   void dispose() {
     // Clean up the controller when the widget is disposed.
@@ -33,6 +34,14 @@ class _State extends State<Itempage> {
 
   @override
   Widget build(BuildContext context) {
+    FirebaseFirestore.instance
+        .collection('Owners')
+        .doc(uidDonor)
+        .get()
+        .then((DocumentSnapshot documentSnapshot) {
+      address = documentSnapshot.get('Address').toString();
+      phoneNumber = documentSnapshot.get('Phone').toString();
+    });
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -94,19 +103,25 @@ class _State extends State<Itempage> {
                 }).then((querySnapshot) {
                   // Here we call the document just after creation
 
-                   generatedID = querySnapshot.id.toString() +
-                      uidDonor.toString(); // Here we call the ID of the document
-                    Fluttertoast.showToast(
-                                  msg: "Item added.",
-                                  toastLength: Toast.LENGTH_LONG,
-                                  gravity: ToastGravity.BOTTOM,
-                                  timeInSecForIosWeb: 1,
-                                  backgroundColor: Colors.red,
-                                  textColor: Colors.white,
-                                  fontSize: 16.0
-                                  );
-
-                      
+                  generatedID = querySnapshot.id.toString() +
+                      uidDonor
+                          .toString(); // Here we call the ID of the document
+                  Fluttertoast.showToast(
+                      msg: "Item added.",
+                      toastLength: Toast.LENGTH_LONG,
+                      gravity: ToastGravity.BOTTOM,
+                      timeInSecForIosWeb: 1,
+                      backgroundColor: Colors.red,
+                      textColor: Colors.white,
+                      fontSize: 16.0);
+                  y
+                      .doc('pending verifications')
+                      .collection('pending verifications')
+                      .add({
+                    'Name': name.text,
+                    'Address': address,
+                    'Phno': phoneNumber,
+                  }).then((value) => null);
                 });
 
                 Navigator.push(
