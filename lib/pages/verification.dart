@@ -7,11 +7,9 @@ import 'package:flutterlogindesign/pages/qr.dart';
 import 'package:flutterlogindesign/pages/qrscan.dart';
 import 'package:flutterlogindesign/pages/volunteer_page.dart';
 
-String qr_code = '';
 String doc;
 String uid;
-
-int x = 0;
+String qr_code;
 var name, type, quantity, babyproduct;
 
 class VerifcationPage extends StatefulWidget {
@@ -26,7 +24,6 @@ class _VerifcationPageState extends State<VerifcationPage> {
   int radio2;
   int radio3;
   int i = 0;
-  int x = 0;
 
   @override
   void initState() {
@@ -36,6 +33,10 @@ class _VerifcationPageState extends State<VerifcationPage> {
     radio2 = 0;
     radio3 = 0;
     i = 0;
+    name = "";
+    type = "";
+    quantity = "";
+    babyproduct = "";
     qrscan();
   }
 
@@ -51,7 +52,7 @@ class _VerifcationPageState extends State<VerifcationPage> {
     CollectionReference b = FirebaseFirestore.instance.collection('Owners');
 
     doc = qr_code.substring(0, 20);
-    uid = qr_code.substring(20, qr_code.length);
+    uid = qr_code.substring(20);
 
     // for(int i=0;i<20;i++)
     // {
@@ -62,16 +63,20 @@ class _VerifcationPageState extends State<VerifcationPage> {
     //   uid = ''+qrcode[i];
     // }
 
-    final info = FirebaseFirestore.instance
+    var info = FirebaseFirestore.instance
         .collection('Owners')
         .doc(uid)
         .collection('items')
         .doc(doc);
     info.get().then((DocumentSnapshot documentSnapshot) {
-      name = documentSnapshot.get('Name');
-      type = documentSnapshot.get('Type');
-      quantity = documentSnapshot.get('Quantity');
-      babyproduct = documentSnapshot.get('Baby');
+      if (documentSnapshot.exists) {
+        name = documentSnapshot.get('Name').toString();
+        type = documentSnapshot.get('Type').toString();
+        quantity = documentSnapshot.get('Quantity').toString();
+        babyproduct = documentSnapshot.get('Baby').toString();
+      } else
+        CircularProgressIndicator();
+      print("here");
     });
 
     print(qr_code);
@@ -259,14 +264,13 @@ class _VerifcationPageState extends State<VerifcationPage> {
       ),
     );
   }
-}
 
-Future<void> qrscan() async {
-  try {
-    qr_code = await FlutterBarcodeScanner.scanBarcode(
-        '#ff6666', 'Cancel', true, ScanMode.QR);
-    x = 1;
-  } on PlatformException {
-    qr_code = 'Error';
+  Future<void> qrscan() async {
+    try {
+      qr_code = await FlutterBarcodeScanner.scanBarcode(
+          '#ff6666', 'Cancel', true, ScanMode.QR);
+    } on PlatformException {
+      qr_code = 'Error';
+    }
   }
 }

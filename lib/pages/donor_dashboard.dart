@@ -19,6 +19,7 @@ class Donor extends StatefulWidget {
 class _DonorState extends State<Donor> {
   @override
   Widget build(BuildContext context) {
+    print(uidDonor);
     return Scaffold(
       appBar: AppBar(
         title: Text("Dashboard"),
@@ -37,14 +38,13 @@ class _DonorState extends State<Donor> {
               leading: Icon(Icons.map_outlined),
             ),
             ListTile(
-              title: Text('Logout'),
-              leading: Icon(Icons.logout),
-              onTap: (){ FirebaseAuth.instance.signOut();
-              Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => SplashScreen()));}
-            )
+                title: Text('Logout'),
+                leading: Icon(Icons.logout),
+                onTap: () {
+                  FirebaseAuth.instance.signOut();
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => SplashScreen()));
+                })
           ],
         ),
       ),
@@ -109,8 +109,10 @@ class _DonorState extends State<Donor> {
                             TextButton(
                               child: const Text('View'),
                               onPressed: () {
-                                Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => Verified()));
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Verified()));
                               },
                             ),
                             const SizedBox(width: 8),
