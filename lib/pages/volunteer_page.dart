@@ -7,6 +7,7 @@ import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 
 import 'package:flutterlogindesign/pages/splash_screen.dart';
 import 'package:flutterlogindesign/pages/verification.dart';
+import 'package:lottie/lottie.dart';
 
 FirebaseAuth auth = FirebaseAuth.instance;
 var uidVolunteer = auth.currentUser.uid;
@@ -161,7 +162,7 @@ class _VolunteerState extends State<Volunteer> {
               child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           
-          children: [
+          children: [Lottie.asset('assets/lottie/lottie.json'),
           ElevatedButton(child:Text('QR Scanner',style: TextStyle(color:Colors.white,fontSize: 20)),onPressed: () {
             
             Navigator.push(context,
@@ -274,12 +275,23 @@ class _VolunteerState extends State<Volunteer> {
           padding: EdgeInsets.zero,
           children: [
             DrawerHeader(
-              child: Text('Here 4 Hygiene'),
+              
+              child: Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [Image.asset('assets/capture.png',) ,Text('Here 4 Hygiene',style: TextStyle(fontSize: 15, color: Colors.black),)]),
               decoration: BoxDecoration(color: Colors.blue),
+              
+            ),
+            ListTile(
+              title: Text('Profile'),
+              leading: Icon(Icons.person)
             ),
             ListTile(
               title: Text('Location'),
               leading: Icon(Icons.map_outlined),
+            ),
+            ListTile(
+              title: Text('Terms and Conditions'),
+              leading: Icon(Icons.checklist)
             ),
             ListTile(
                 title: Text('Logout'),

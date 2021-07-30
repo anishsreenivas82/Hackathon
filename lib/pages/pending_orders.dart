@@ -46,11 +46,19 @@ class _PendingOrdersState extends State<PendingOrders> {
                       width * 0.01, height * 0.01, width * 0.01, height * 0.01),
                   child: Container(
                     child: new Card(
+                      
                       elevation: 20,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(width*0.1),
                       ),
                       child: InkWell(
+                        onTap: (){
+                          generatedID =
+                            document.id.toString() + uidDonor.toString();
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => Qrcode()));
+                          
+                        },
                         child: Padding(
                           padding:  EdgeInsets.all(width*0.04),
                           child: Column(

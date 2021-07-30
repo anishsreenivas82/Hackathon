@@ -25,14 +25,24 @@ class _Shelter_pageState extends State<Shelter_page> {
           padding: EdgeInsets.zero,
           children: [
             DrawerHeader(
-              child: Text('Here 4 Hygiene'),
               
+              child: Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [Image.asset('assets/capture.png',) ,Text('Here 4 Hygiene',style: TextStyle(fontSize: 15, color: Colors.black),)]),
               decoration: BoxDecoration(color: Colors.blue),
+              
+            ),
+            ListTile(
+              title: Text('Profile'),
+              leading: Icon(Icons.person),
+              
             ),
             ListTile(
               title: Text('Location'),
               leading: Icon(Icons.map_outlined),
-              
+            ),
+            ListTile(
+              title: Text('Terms and Conditions'),
+              leading: Icon(Icons.checklist)
             ),
             ListTile(
               title: Text('Logout'),
