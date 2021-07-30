@@ -144,10 +144,18 @@ class _DonorState extends State<Donor> {
                             TextButton(
                               child: const Text('View'),
                               onPressed: () {
+<<<<<<< Updated upstream
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) => PendingOrders()));
+=======
+                                 Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => PendingOrders()));
+                                
+>>>>>>> Stashed changes
                               },
                             ),
                             const SizedBox(width: 8),
