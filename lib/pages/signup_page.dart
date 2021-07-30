@@ -7,6 +7,7 @@ import 'package:flutterlogindesign/pages/volunteer_page.dart';
 import 'package:flutterlogindesign/widgets/btn_widget.dart';
 import 'package:flutterlogindesign/widgets/Headdersignup.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import 'donor_dashboard.dart';
 
@@ -127,12 +128,41 @@ class _RegPageState extends State<RegPage> {
                             }
                           } on FirebaseAuthException catch (e) {
                             if (e.code == 'weak-password') {
+                              Fluttertoast.showToast(
+                                  msg: "The password provided is too weak.",
+                                  toastLength: Toast.LENGTH_LONG,
+                                  gravity: ToastGravity.BOTTOM,
+                                  timeInSecForIosWeb: 1,
+                                  backgroundColor: Colors.red,
+                                  textColor: Colors.white,
+                                  fontSize: 16.0
+                                  );
                               print('The password provided is too weak.');
-                            } else if (e.code == 'email-already-in-use') {
+                            } else if (e.code == 'email-already-in-use') { 
+                              Fluttertoast.showToast(
+                                  msg: "The account already exists for that email.",
+                                  toastLength: Toast.LENGTH_LONG,
+                                  gravity: ToastGravity.BOTTOM,
+                                  timeInSecForIosWeb: 1,
+                                  backgroundColor: Colors.red,
+                                  textColor: Colors.white,
+                                  fontSize: 16.0
+                                  );
+
                               print(
                                   'The account already exists for that email.');
                             }
                           } catch (e) {
+                            Fluttertoast.showToast(
+                                  msg: "$e",
+                                  toastLength: Toast.LENGTH_LONG,
+                                  gravity: ToastGravity.BOTTOM,
+                                  timeInSecForIosWeb: 1,
+                                  backgroundColor: Colors.red,
+                                  textColor: Colors.white,
+                                  fontSize: 16.0
+                                  );
+
                             print(e);
                           }
                         },

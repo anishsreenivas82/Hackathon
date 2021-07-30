@@ -8,6 +8,7 @@ import 'package:flutterlogindesign/widgets/btn_widget.dart';
 import 'package:flutterlogindesign/widgets/Headdersignup.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import 'donor_dashboard.dart';
 
@@ -135,17 +136,28 @@ class _LoginPageState extends State<LoginPage> {
                                 if (documentSnapshot.exists) {
                                   check = documentSnapshot.get("choice");
                                 } else {
-                                  check = '0';
+                                  check = '(0)';
                                 }
                               });
-                              if (check == "(1)") {
+                              if (check == "(3)" ||
+                                  check == "(2)" ||
+                                  check == "(0)") {
+                                FirebaseAuth.instance.signOut();
+                                Fluttertoast.showToast(
+                                  msg: "No account found",
+                                  toastLength: Toast.LENGTH_LONG,
+                                  gravity: ToastGravity.BOTTOM,
+                                  timeInSecForIosWeb: 1,
+                                  backgroundColor: Colors.red,
+                                  textColor: Colors.white,
+                                  fontSize: 16.0
+                                  );
+                                print("No account found");
+                              } else {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) => Donor()));
-                              } else {
-                                FirebaseAuth.instance.signOut();
-                                print("No account found");
                               }
                             } else if (choice == "(2)") {
                               FirebaseFirestore.instance
@@ -156,17 +168,28 @@ class _LoginPageState extends State<LoginPage> {
                                 if (documentSnapshot.exists) {
                                   check = documentSnapshot.get("choice");
                                 } else {
-                                  check = '0';
+                                  check = '(0)';
                                 }
                               });
-                              if (check == "(2)") {
+                              if (check == "(3)" ||
+                                  check == "(1)" ||
+                                  check == "(0)") {
+                                FirebaseAuth.instance.signOut();
+                                Fluttertoast.showToast(
+                                  msg: "No account found",
+                                  toastLength: Toast.LENGTH_LONG,
+                                  gravity: ToastGravity.BOTTOM,
+                                  timeInSecForIosWeb: 1,
+                                  backgroundColor: Colors.red,
+                                  textColor: Colors.white,
+                                  fontSize: 16.0
+                                  );
+                                print("No account found");
+                              } else {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => Shelter_page  ()));
-                              } else {
-                                FirebaseAuth.instance.signOut();
-                                print("No account found");
+                                        builder: (context) => Shelter_page()));
                               }
                             } else if (choice == "(3)") {
                               FirebaseFirestore.instance
@@ -177,23 +200,52 @@ class _LoginPageState extends State<LoginPage> {
                                 if (documentSnapshot.exists) {
                                   check = documentSnapshot.get("choice");
                                 } else {
-                                  check = '0';
+                                  check = '(0)';
                                 }
                               });
-                              if (check == "(3)") {
+                              if (check == "(2)" ||
+                                  check == "(1)" ||
+                                  check == "(0)") {
+                                FirebaseAuth.instance.signOut();
+                                Fluttertoast.showToast(
+                                  msg: "No account found",
+                                  toastLength: Toast.LENGTH_LONG,
+                                  gravity: ToastGravity.BOTTOM,
+                                  timeInSecForIosWeb: 1,
+                                  backgroundColor: Colors.red,
+                                  textColor: Colors.white,
+                                  fontSize: 16.0
+                                  );
+                                print("No account found");
+                              } else {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) => Volunteer()));
-                              } else {
-                                FirebaseAuth.instance.signOut();
-                                print("No account found");
                               }
                             }
                           } on FirebaseAuthException catch (e) {
                             if (e.code == 'user-not-found') {
+                              Fluttertoast.showToast(
+                                  msg: "No user found for that email.",
+                                  toastLength: Toast.LENGTH_LONG,
+                                  gravity: ToastGravity.BOTTOM,
+                                  timeInSecForIosWeb: 1,
+                                  backgroundColor: Colors.red,
+                                  textColor: Colors.white,
+                                  fontSize: 16.0
+                                  );
                               print('No user found for that email.');
                             } else if (e.code == 'wrong-password') {
+                               Fluttertoast.showToast(
+                                  msg: "Wrong password provided for that user.",
+                                  toastLength: Toast.LENGTH_LONG,
+                                  gravity: ToastGravity.BOTTOM,
+                                  timeInSecForIosWeb: 1,
+                                  backgroundColor: Colors.red,
+                                  textColor: Colors.white,
+                                  fontSize: 16.0
+                                  );
                               print('Wrong password provided for that user.');
                             }
                           }
@@ -225,6 +277,7 @@ class _LoginPageState extends State<LoginPage> {
                               color: Colors.black54,
                               decoration: TextDecoration.underline,
                             )),
+
                       ]),
                     )
                   ],
@@ -234,9 +287,10 @@ class _LoginPageState extends State<LoginPage> {
           ),
         ),
       ),
+      
     );
   }
-
+  
   Widget _textInput({hint, icon, myController, obscure}) {
     return Container(
       margin: EdgeInsets.only(top: 10),
