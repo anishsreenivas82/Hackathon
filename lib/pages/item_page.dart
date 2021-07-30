@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterlogindesign/pages/donor_dashboard.dart';
 import 'package:flutterlogindesign/pages/qr.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 String generatedID;
 
@@ -95,6 +96,16 @@ class _State extends State<Itempage> {
 
                    generatedID = querySnapshot.id.toString() +
                       uidDonor.toString(); // Here we call the ID of the document
+                    Fluttertoast.showToast(
+                                  msg: "Item added.",
+                                  toastLength: Toast.LENGTH_LONG,
+                                  gravity: ToastGravity.BOTTOM,
+                                  timeInSecForIosWeb: 1,
+                                  backgroundColor: Colors.red,
+                                  textColor: Colors.white,
+                                  fontSize: 16.0
+                                  );
+
                       
                 });
 

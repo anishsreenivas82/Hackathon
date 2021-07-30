@@ -26,6 +26,7 @@ dependencies:
   flutter:
     sdk: flutter
   firebase_core: "0.7.0"
+  fluttertoast: ^8.0.7
 
   
     

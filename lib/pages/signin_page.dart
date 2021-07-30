@@ -8,6 +8,7 @@ import 'package:flutterlogindesign/widgets/btn_widget.dart';
 import 'package:flutterlogindesign/widgets/Headdersignup.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import 'donor_dashboard.dart';
 
@@ -142,6 +143,15 @@ class _LoginPageState extends State<LoginPage> {
                                   check == "(2)" ||
                                   check == "(0)") {
                                 FirebaseAuth.instance.signOut();
+                                Fluttertoast.showToast(
+                                  msg: "No account found",
+                                  toastLength: Toast.LENGTH_LONG,
+                                  gravity: ToastGravity.BOTTOM,
+                                  timeInSecForIosWeb: 1,
+                                  backgroundColor: Colors.red,
+                                  textColor: Colors.white,
+                                  fontSize: 16.0
+                                  );
                                 print("No account found");
                               } else {
                                 Navigator.push(
@@ -165,6 +175,15 @@ class _LoginPageState extends State<LoginPage> {
                                   check == "(1)" ||
                                   check == "(0)") {
                                 FirebaseAuth.instance.signOut();
+                                Fluttertoast.showToast(
+                                  msg: "No account found",
+                                  toastLength: Toast.LENGTH_LONG,
+                                  gravity: ToastGravity.BOTTOM,
+                                  timeInSecForIosWeb: 1,
+                                  backgroundColor: Colors.red,
+                                  textColor: Colors.white,
+                                  fontSize: 16.0
+                                  );
                                 print("No account found");
                               } else {
                                 Navigator.push(
@@ -188,6 +207,15 @@ class _LoginPageState extends State<LoginPage> {
                                   check == "(1)" ||
                                   check == "(0)") {
                                 FirebaseAuth.instance.signOut();
+                                Fluttertoast.showToast(
+                                  msg: "No account found",
+                                  toastLength: Toast.LENGTH_LONG,
+                                  gravity: ToastGravity.BOTTOM,
+                                  timeInSecForIosWeb: 1,
+                                  backgroundColor: Colors.red,
+                                  textColor: Colors.white,
+                                  fontSize: 16.0
+                                  );
                                 print("No account found");
                               } else {
                                 Navigator.push(
@@ -198,8 +226,26 @@ class _LoginPageState extends State<LoginPage> {
                             }
                           } on FirebaseAuthException catch (e) {
                             if (e.code == 'user-not-found') {
+                              Fluttertoast.showToast(
+                                  msg: "No user found for that email.",
+                                  toastLength: Toast.LENGTH_LONG,
+                                  gravity: ToastGravity.BOTTOM,
+                                  timeInSecForIosWeb: 1,
+                                  backgroundColor: Colors.red,
+                                  textColor: Colors.white,
+                                  fontSize: 16.0
+                                  );
                               print('No user found for that email.');
                             } else if (e.code == 'wrong-password') {
+                               Fluttertoast.showToast(
+                                  msg: "Wrong password provided for that user.",
+                                  toastLength: Toast.LENGTH_LONG,
+                                  gravity: ToastGravity.BOTTOM,
+                                  timeInSecForIosWeb: 1,
+                                  backgroundColor: Colors.red,
+                                  textColor: Colors.white,
+                                  fontSize: 16.0
+                                  );
                               print('Wrong password provided for that user.');
                             }
                           }
@@ -231,6 +277,7 @@ class _LoginPageState extends State<LoginPage> {
                               color: Colors.black54,
                               decoration: TextDecoration.underline,
                             )),
+
                       ]),
                     )
                   ],
@@ -240,9 +287,10 @@ class _LoginPageState extends State<LoginPage> {
           ),
         ),
       ),
+      
     );
   }
-
+  
   Widget _textInput({hint, icon, myController, obscure}) {
     return Container(
       margin: EdgeInsets.only(top: 10),
