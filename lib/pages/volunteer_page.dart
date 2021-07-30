@@ -120,12 +120,19 @@ class _VolunteerState extends State<Volunteer> {
           );
         },
       ),
-      Column(children: [
-        FloatingActionButton(onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => VerifcationPage()));
-        })
-      ]),
+      Center(
+              child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          
+          children: [
+          ElevatedButton(child:Text('QR Scanner',style: TextStyle(color:Colors.white,fontSize: 20)),onPressed: () {
+            
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => VerifcationPage()));
+          },
+          style:ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.amber[800]) ))
+        ]),
+      ),
       StreamBuilder<QuerySnapshot>(
         stream: _AcceptedVerifyStream,
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
