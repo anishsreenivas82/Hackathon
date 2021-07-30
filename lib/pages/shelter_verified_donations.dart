@@ -8,7 +8,6 @@ FirebaseAuth auth = FirebaseAuth.instance;
 var uidShelter = auth.currentUser.uid.toString();
 
 class Shelter_verified_don extends StatefulWidget {
-  // const Shelter_verified_don({ Key? key }) : super(key: key);
 
   @override
   _Shelter_verified_donState createState() => _Shelter_verified_donState();
@@ -191,15 +190,9 @@ class _Shelter_verified_donState extends State<Shelter_verified_don> {
                             ],
                           ),
                         ),
-                        // onTap: () => {
-                        //   generatedID = document.id.toString() + uidDonor.toString(),
-                        //   Navigator.push(context,
-                        //       MaterialPageRoute(builder: (context) => Qrcode()))
-
-                        // },
+                        
                       ),
-                      // title: new Text(data['Name'].toString()),
-                      // subtitle: new Text(data['Type'].toString()),
+                      
                     ),
                   ),
                 );

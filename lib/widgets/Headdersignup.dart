@@ -17,8 +17,11 @@ class HeaderContainer1 extends StatelessWidget {
               padding: const EdgeInsets.all(15),
             ),
           ),
-          Center(
-            child: Lottie.asset('assets/lottie/lottie.json'),
+          Container(
+            height: MediaQuery.of(context).size.height * 0.26,
+            child: Center(
+              child: Lottie.asset('assets/lottie/lottie.json'),
+            ),
           ),
           Center(
             child: Container(

@@ -5,7 +5,6 @@ import 'package:flutterlogindesign/pages/donor_dashboard.dart';
 import 'package:flutterlogindesign/pages/verification.dart';
 
 class Verified extends StatefulWidget {
-  // const ({ Key? key }) : super(key: key);
 
   @override
   _State createState() => _State();

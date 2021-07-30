@@ -12,7 +12,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 
 import 'donor_dashboard.dart';
 
-//to push
+
 Route _createRoute() {
   return PageRouteBuilder(
     pageBuilder: (context, animation, secondaryAnimation) => RegPage(),
@@ -52,27 +52,7 @@ class _LoginPageState extends State<LoginPage> {
       };
     TextEditingController emailcontroller = new TextEditingController();
     TextEditingController passwordcontroller = new TextEditingController();
-    // FutureBuilder(
-    //   future: getUserInfo(),
-    //   builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
-    //     if (snapshot.connectionState == ConnectionState.done) {
-    //       return snapshot.data.data["Position"];
-    //     } else if (snapshot.connectionState == ConnectionState.none) {
-    //       return Text("No data");
-    //     }
-    //     return CircularProgressIndicator();
-    //   },
-    // );
-//     final String _collection = 'collectionName';
-// final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
-
-// getData() async {
-//   return await _fireStore.collection(_collection).doc('CollectionNumber');
-// }
-
-// getData().then((val){
-//   print(val.get().;
-// });
+   
     FirebaseFirestore.instance
         .collection('Tracker')
         .doc('CollectionNumber')
@@ -143,15 +123,7 @@ class _LoginPageState extends State<LoginPage> {
                                   check == "(2)" ||
                                   check == "(0)") {
                                 FirebaseAuth.instance.signOut();
-                                Fluttertoast.showToast(
-                                  msg: "No account found",
-                                  toastLength: Toast.LENGTH_LONG,
-                                  gravity: ToastGravity.BOTTOM,
-                                  timeInSecForIosWeb: 1,
-                                  backgroundColor: Colors.red,
-                                  textColor: Colors.white,
-                                  fontSize: 16.0
-                                  );
+
                                 print("No account found");
                               } else {
                                 Navigator.push(
@@ -175,15 +147,7 @@ class _LoginPageState extends State<LoginPage> {
                                   check == "(1)" ||
                                   check == "(0)") {
                                 FirebaseAuth.instance.signOut();
-                                Fluttertoast.showToast(
-                                  msg: "No account found",
-                                  toastLength: Toast.LENGTH_LONG,
-                                  gravity: ToastGravity.BOTTOM,
-                                  timeInSecForIosWeb: 1,
-                                  backgroundColor: Colors.red,
-                                  textColor: Colors.white,
-                                  fontSize: 16.0
-                                  );
+
                                 print("No account found");
                               } else {
                                 Navigator.push(
@@ -207,15 +171,7 @@ class _LoginPageState extends State<LoginPage> {
                                   check == "(1)" ||
                                   check == "(0)") {
                                 FirebaseAuth.instance.signOut();
-                                Fluttertoast.showToast(
-                                  msg: "No account found",
-                                  toastLength: Toast.LENGTH_LONG,
-                                  gravity: ToastGravity.BOTTOM,
-                                  timeInSecForIosWeb: 1,
-                                  backgroundColor: Colors.red,
-                                  textColor: Colors.white,
-                                  fontSize: 16.0
-                                  );
+
                                 print("No account found");
                               } else {
                                 Navigator.push(
@@ -233,19 +189,17 @@ class _LoginPageState extends State<LoginPage> {
                                   timeInSecForIosWeb: 1,
                                   backgroundColor: Colors.red,
                                   textColor: Colors.white,
-                                  fontSize: 16.0
-                                  );
+                                  fontSize: 16.0);
                               print('No user found for that email.');
                             } else if (e.code == 'wrong-password') {
-                               Fluttertoast.showToast(
+                              Fluttertoast.showToast(
                                   msg: "Wrong password provided for that user.",
                                   toastLength: Toast.LENGTH_LONG,
                                   gravity: ToastGravity.BOTTOM,
                                   timeInSecForIosWeb: 1,
                                   backgroundColor: Colors.red,
                                   textColor: Colors.white,
-                                  fontSize: 16.0
-                                  );
+                                  fontSize: 16.0);
                               print('Wrong password provided for that user.');
                             }
                           }
@@ -277,7 +231,6 @@ class _LoginPageState extends State<LoginPage> {
                               color: Colors.black54,
                               decoration: TextDecoration.underline,
                             )),
-
                       ]),
                     )
                   ],
@@ -287,10 +240,9 @@ class _LoginPageState extends State<LoginPage> {
           ),
         ),
       ),
-      
     );
   }
-  
+
   Widget _textInput({hint, icon, myController, obscure}) {
     return Container(
       margin: EdgeInsets.only(top: 10),

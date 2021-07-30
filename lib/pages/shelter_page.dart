@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutterlogindesign/pages/shelter_prev_donations.dart';
 import 'package:flutterlogindesign/pages/shelter_verified_donations.dart';
 import 'package:flutterlogindesign/pages/splash_screen.dart';
+import 'package:lottie/lottie.dart';
 
 class Shelter_page extends StatefulWidget {
   // const Shelter_page({ Key? key }) : super(key: key);
@@ -15,7 +16,9 @@ class Shelter_page extends StatefulWidget {
 class _Shelter_pageState extends State<Shelter_page> {
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
     return Scaffold(
+      backgroundColor: Colors.amber[100],
       appBar: AppBar(
         title: Text("Dashboard"),
         centerTitle: true,
@@ -25,33 +28,38 @@ class _Shelter_pageState extends State<Shelter_page> {
           padding: EdgeInsets.zero,
           children: [
             DrawerHeader(
-              
-              child: Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [Image.asset('assets/capture.png',) ,Text('Here 4 Hygiene',style: TextStyle(fontSize: 15, color: Colors.black),)]),
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Image.asset(
+                      'assets/capture.png',
+                    ),
+                    Text(
+                      'Here 4 Hygiene',
+                      style: TextStyle(fontSize: 15, color: Colors.white),
+                    )
+                  ]),
               decoration: BoxDecoration(color: Colors.blue),
-              
             ),
             ListTile(
               title: Text('Profile'),
               leading: Icon(Icons.person),
-              
             ),
             ListTile(
               title: Text('Location'),
               leading: Icon(Icons.map_outlined),
             ),
             ListTile(
-              title: Text('Terms and Conditions'),
-              leading: Icon(Icons.checklist)
-            ),
+                title: Text('Terms and Conditions'),
+                leading: Icon(Icons.checklist)),
             ListTile(
               title: Text('Logout'),
               leading: Icon(Icons.logout),
-              onTap: (){ FirebaseAuth.instance.signOut();
-              Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => SplashScreen()));},
+              onTap: () {
+                FirebaseAuth.instance.signOut();
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => SplashScreen()));
+              },
             )
           ],
         ),
@@ -60,10 +68,11 @@ class _Shelter_pageState extends State<Shelter_page> {
         child: Column(
           children: [
             Container(
-              height: MediaQuery.of(context).size.height * 0.10,
+              child: Lottie.asset('assets/lottie/lottie.json'),
+              height: 0.3 * height,
             ),
             Container(
-                height: MediaQuery.of(context).size.height * 0.23,
+                height: MediaQuery.of(context).size.height * 0.18,
                 child: Center(
                   child: Card(
                     child: Column(
@@ -86,7 +95,8 @@ class _Shelter_pageState extends State<Shelter_page> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => Shelter_verified_don()));
+                                        builder: (context) =>
+                                            Shelter_verified_don()));
                               },
                             ),
                             const SizedBox(width: 8),
@@ -97,7 +107,7 @@ class _Shelter_pageState extends State<Shelter_page> {
                   ),
                 )),
             Container(
-                height: MediaQuery.of(context).size.height * 0.23,
+                height: MediaQuery.of(context).size.height * 0.18,
                 child: Center(
                   child: Card(
                     child: Column(
@@ -109,7 +119,8 @@ class _Shelter_pageState extends State<Shelter_page> {
                             color: Colors.green,
                           ),
                           title: Text('Previously recived donations'),
-                          subtitle: Text('View donations which you had requested for before'),
+                          subtitle: Text(
+                              'View donations which you had requested for before'),
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
@@ -117,8 +128,10 @@ class _Shelter_pageState extends State<Shelter_page> {
                             TextButton(
                               child: const Text('View'),
                               onPressed: () {
-                                Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => Shelter_Prev()));
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Shelter_Prev()));
                               },
                             ),
                             const SizedBox(width: 8),
@@ -128,7 +141,6 @@ class _Shelter_pageState extends State<Shelter_page> {
                     ),
                   ),
                 )),
-            
           ],
         ),
       ),

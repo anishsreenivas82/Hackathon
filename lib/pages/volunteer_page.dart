@@ -7,6 +7,7 @@ import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 
 import 'package:flutterlogindesign/pages/splash_screen.dart';
 import 'package:flutterlogindesign/pages/verification.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:lottie/lottie.dart';
 
 FirebaseAuth auth = FirebaseAuth.instance;
@@ -19,19 +20,7 @@ class Volunteer extends StatefulWidget {
 
 class _VolunteerState extends State<Volunteer> {
   Future<void> x;
-  // PageController _pageController;
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _pageController = PageController();
-  // }
-
-  // @override
-  // void dispose() {
-  //   _pageController.dispose();
-  //   super.dispose();
-  // }
 
   int currentindex = 0;
   final Stream<QuerySnapshot> _PendingVerifyStream = FirebaseFirestore.instance
@@ -63,112 +52,144 @@ class _VolunteerState extends State<Volunteer> {
               Map<String, dynamic> data =
                   document.data() as Map<String, dynamic>;
               return Container(
-                  child:Container(
-                  height: height * 0.40,
-                  padding: EdgeInsets.fromLTRB(
-                      width * 0.03, height * 0.01, width * 0.03, height * 0.01),
                   child: Container(
-                    child: new Card(
-                      elevation: 20,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(width*0.1),
-                      ),
-                      child: InkWell(
-                        child: Padding(
-                          padding:  EdgeInsets.all(width*0.04),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Row(
-                                children: [
-                                  Icon(
-                                    Icons.lightbulb,
-                                    color: Colors.amber,
-                                  ),
-                                  Text(
-                                    'Name:',
-                                    style: TextStyle(fontSize: 15),
-                                  ),
-                                  SizedBox(
-                                    width: 4,
-                                  ),
-                                  Text(data['Name'].toString()),
-                                ],
+                      height: height * 0.40,
+                      padding: EdgeInsets.fromLTRB(width * 0.03, height * 0.01,
+                          width * 0.03, height * 0.01),
+                      child: Container(
+                          child: new Card(
+                              elevation: 20,
+                              shape: RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.circular(width * 0.1),
                               ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              Row(
-                                children: [
-                                  Icon(
-                                    Icons.lightbulb,
-                                    color: Colors.amber,
-                                  ),
-                                  Text(
-                                    'Address:',
-                                    style: TextStyle(fontSize: 15),
-                                  ),
-                                  SizedBox(
-                                    width: 4,
-                                  ),
-                                  Text(data['Address'].toString()),
-                                ],
-                              ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              Row(
-                                children: [
-                                  Icon(
-                                    Icons.lightbulb,
-                                    color: Colors.amber,
-                                  ),
-                                  Text(
-                                    'Phone Number:',
-                                    style: TextStyle(fontSize: 15),
-                                  ),
-                                  SizedBox(
-                                    width: 4,
-                                  ),
-                                  Text(data['Phno'].toString()),
-                                  
-                                ],
-                              ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              ElevatedButton(onPressed:(){
-                                    FirebaseFirestore.instance
-                          .collection('Volunteer')
-                          .doc(uidVolunteer)
-                          .collection('accepted verifications')
-                          .add({
-                        'Name': data['Name'].toString(),
-                        'Address': data['Address'].toString(),
-                        'Phno': data['Phno'].toString(),
-                      }).then((value) => FirebaseFirestore.instance
-                              .collection('Volunteer')
-                              .doc('pending verifications')
-                              .collection('pending verifications')
-                              .doc(document.id)
-                              .delete());
-                                  }, child:Text('Accept',style: TextStyle(fontSize: 15)))
-                            ])))))));
+                              child: InkWell(
+                                  child: Padding(
+                                      padding: EdgeInsets.all(width * 0.04),
+                                      child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Icon(
+                                                  Icons.lightbulb,
+                                                  color: Colors.amber,
+                                                ),
+                                                Text(
+                                                  'Name:',
+                                                  style:
+                                                      TextStyle(fontSize: 15),
+                                                ),
+                                                SizedBox(
+                                                  width: 4,
+                                                ),
+                                                Text(data['Name'].toString()),
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              height: 5,
+                                            ),
+                                            Row(
+                                              children: [
+                                                Icon(
+                                                  Icons.lightbulb,
+                                                  color: Colors.amber,
+                                                ),
+                                                Text(
+                                                  'Address:',
+                                                  style:
+                                                      TextStyle(fontSize: 15),
+                                                ),
+                                                SizedBox(
+                                                  width: 4,
+                                                ),
+                                                Text(
+                                                    data['Address'].toString()),
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              height: 5,
+                                            ),
+                                            Row(
+                                              children: [
+                                                Icon(
+                                                  Icons.lightbulb,
+                                                  color: Colors.amber,
+                                                ),
+                                                Text(
+                                                  'Phone Number:',
+                                                  style:
+                                                      TextStyle(fontSize: 15),
+                                                ),
+                                                SizedBox(
+                                                  width: 4,
+                                                ),
+                                                Text(data['Phno'].toString()),
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              height: 5,
+                                            ),
+                                            ElevatedButton(
+                                                onPressed: () {
+                                                  Fluttertoast.showToast(
+                                                      msg:
+                                                          "Verification Task Accepted.",
+                                                      toastLength:
+                                                          Toast.LENGTH_LONG,
+                                                      gravity:
+                                                          ToastGravity.BOTTOM,
+                                                      timeInSecForIosWeb: 1,
+                                                      backgroundColor:
+                                                          Colors.red,
+                                                      textColor: Colors.white,
+                                                      fontSize: 16.0);
+
+                                                  FirebaseFirestore.instance
+                                                      .collection('Volunteer')
+                                                      .doc(uidVolunteer)
+                                                      .collection(
+                                                          'accepted verifications')
+                                                      .add({
+                                                    'Name':
+                                                        data['Name'].toString(),
+                                                    'Address': data['Address']
+                                                        .toString(),
+                                                    'Phno':
+                                                        data['Phno'].toString(),
+                                                  }).then((value) => FirebaseFirestore
+                                                          .instance
+                                                          .collection(
+                                                              'Volunteer')
+                                                          .doc(
+                                                              'pending verifications')
+                                                          .collection(
+                                                              'pending verifications')
+                                                          .doc(document.id)
+                                                          .delete());
+                                                },
+                                                child: Text('Accept',
+                                                    style: TextStyle(
+                                                        fontSize: 15)))
+                                          ])))))));
             }).toList(),
           );
         },
       ),
       Center(
-              child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          
-          children: [Lottie.asset('assets/lottie/lottie.json'),
-          ElevatedButton(child:Text('QR Scanner',style: TextStyle(color:Colors.white,fontSize: 20)),onPressed: () {
-            
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => VerifcationPage()));
-          },
-          style:ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.amber[800]) ))
+        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+          Lottie.asset('assets/lottie/lottie.json'),
+          ElevatedButton(
+              child: Text('QR Scanner',
+                  style: TextStyle(color: Colors.white, fontSize: 20)),
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => VerifcationPage()));
+              },
+              style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.all(Colors.amber[800])))
         ]),
       ),
       StreamBuilder<QuerySnapshot>(
@@ -185,80 +206,86 @@ class _VolunteerState extends State<Volunteer> {
               Map<String, dynamic> data =
                   document.data() as Map<String, dynamic>;
               return Container(
-                  child:Container(
-                  height: height * 0.40,
-                  padding: EdgeInsets.fromLTRB(
-                      width * 0.03, height * 0.01, width * 0.03, height * 0.01),
                   child: Container(
-                    child: new Card(
-                      elevation: 20,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(width*0.1),
-                      ),
-                      child: InkWell(
-                        child: Padding(
-                          padding:  EdgeInsets.all(width*0.04),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Row(
-                                children: [
-                                  Icon(
-                                    Icons.lightbulb,
-                                    color: Colors.amber,
-                                  ),
-                                  Text(
-                                    'Name:',
-                                    style: TextStyle(fontSize: 15),
-                                  ),
-                                  SizedBox(
-                                    width: 4,
-                                  ),
-                                  Text(data['Name'].toString()),
-                                ],
+                      height: height * 0.40,
+                      padding: EdgeInsets.fromLTRB(width * 0.03, height * 0.01,
+                          width * 0.03, height * 0.01),
+                      child: Container(
+                          child: new Card(
+                              elevation: 20,
+                              shape: RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.circular(width * 0.1),
                               ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              Row(
-                                children: [
-                                  Icon(
-                                    Icons.lightbulb,
-                                    color: Colors.amber,
-                                  ),
-                                  Text(
-                                    'Address:',
-                                    style: TextStyle(fontSize: 15),
-                                  ),
-                                  SizedBox(
-                                    width: 4,
-                                  ),
-                                  Text(data['Address'].toString()),
-                                ],
-                              ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              Row(
-                                children: [
-                                  Icon(
-                                    Icons.lightbulb,
-                                    color: Colors.amber,
-                                  ),
-                                  Text(
-                                    'Phone Number:',
-                                    style: TextStyle(fontSize: 15),
-                                  ),
-                                  SizedBox(
-                                    width: 4,
-                                  ),
-                                  Text(data['Phno'].toString()),
-                                ],
-                              ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                            ])))))));
+                              child: InkWell(
+                                  child: Padding(
+                                      padding: EdgeInsets.all(width * 0.04),
+                                      child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Icon(
+                                                  Icons.lightbulb,
+                                                  color: Colors.amber,
+                                                ),
+                                                Text(
+                                                  'Name:',
+                                                  style:
+                                                      TextStyle(fontSize: 15),
+                                                ),
+                                                SizedBox(
+                                                  width: 4,
+                                                ),
+                                                Text(data['Name'].toString()),
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              height: 5,
+                                            ),
+                                            Row(
+                                              children: [
+                                                Icon(
+                                                  Icons.lightbulb,
+                                                  color: Colors.amber,
+                                                ),
+                                                Text(
+                                                  'Address:',
+                                                  style:
+                                                      TextStyle(fontSize: 15),
+                                                ),
+                                                SizedBox(
+                                                  width: 4,
+                                                ),
+                                                Text(
+                                                    data['Address'].toString()),
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              height: 5,
+                                            ),
+                                            Row(
+                                              children: [
+                                                Icon(
+                                                  Icons.lightbulb,
+                                                  color: Colors.amber,
+                                                ),
+                                                Text(
+                                                  'Phone Number:',
+                                                  style:
+                                                      TextStyle(fontSize: 15),
+                                                ),
+                                                SizedBox(
+                                                  width: 4,
+                                                ),
+                                                Text(data['Phno'].toString()),
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              height: 5,
+                                            ),
+                                          ])))))));
             }).toList(),
           );
         },
@@ -268,31 +295,34 @@ class _VolunteerState extends State<Volunteer> {
     return Scaffold(
       backgroundColor: Colors.amber[100],
       appBar: AppBar(
-        title: Text('My Flutter App'),
+        title: Text('Dashboard'),
       ),
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
             DrawerHeader(
-              
-              child: Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [Image.asset('assets/capture.png',) ,Text('Here 4 Hygiene',style: TextStyle(fontSize: 15, color: Colors.black),)]),
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Image.asset(
+                      'assets/capture.png',
+                    ),
+                    Text(
+                      'Here 4 Hygiene',
+                      style: TextStyle(fontSize: 15, color: Colors.white),
+                    )
+                  ]),
               decoration: BoxDecoration(color: Colors.blue),
-              
             ),
-            ListTile(
-              title: Text('Profile'),
-              leading: Icon(Icons.person)
-            ),
+            ListTile(title: Text('Profile'), leading: Icon(Icons.person)),
             ListTile(
               title: Text('Location'),
               leading: Icon(Icons.map_outlined),
             ),
             ListTile(
-              title: Text('Terms and Conditions'),
-              leading: Icon(Icons.checklist)
-            ),
+                title: Text('Terms and Conditions'),
+                leading: Icon(Icons.checklist)),
             ListTile(
                 title: Text('Logout'),
                 leading: Icon(Icons.logout),
@@ -307,7 +337,7 @@ class _VolunteerState extends State<Volunteer> {
       body: children[currentindex], // new
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.black87,
         selectedItemColor: Colors.amber[200],
         unselectedItemColor: Colors.amber[100],
         // new
@@ -325,52 +355,14 @@ class _VolunteerState extends State<Volunteer> {
             icon: Icon(Icons.check),
             label: ('Accepted'),
           ),
-          //  new BottomNavigationBarItem(
-          //    icon: Icon(Icons.person),
-          //    label: ('Previous Ver')
-          //  ),
-          //   new BottomNavigationBarItem(
-          //    icon: Icon(Icons.person),
-          //    label: ('Pending ver')
-          //  )
         ],
         onTap: (index) {
           setState(() {
             currentindex = index;
 
-            //  _pageController.animateToPage(index,
-            //     duration: Duration(milliseconds: 500), curve: Curves.easeOut);
           });
         },
       ),
     );
   }
-
-//   void _onItemTapped(int index) {
-//     setState(() {
-// currentindex = index;
-//           //
-//           //
-//           //using this page controller you can make beautiful animation effects
-//           _pageController.animateToPage(index,
-//               duration: Duration(milliseconds: 500), curve: Curves.easeOut);
-// });
-//   }
 }
-
-// var qrcode = '';
-// Future<void> qrscan() async{
-//   try {
-//    qrcode = await FlutterBarcodeScanner.scanBarcode(
-//     '#ff6666',
-//     'Cancel',
-//     true,
-//     ScanMode.QR);
-//     return 'xyz';
-
-//   }
-//   on PlatformException{
-//     qrcode='Error';
-//   }
-
-// }

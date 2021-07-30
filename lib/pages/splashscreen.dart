@@ -1,9 +1,8 @@
-// import 'dart:ffi';
+
 
 import 'package:flutter/material.dart';
 import 'package:flutterlogindesign/pages/signin_page.dart';
 import 'package:flutterlogindesign/pages/splash_screen.dart';
-// import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:lottie/lottie.dart';
 
 class MyHomePage extends StatefulWidget {

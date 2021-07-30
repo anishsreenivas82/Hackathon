@@ -9,7 +9,6 @@ class HeaderContainer2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // height: MediaQuery.of(context).size.height * 0.5,
       color: Colors.lightBlueAccent,
       child: Wrap(children: [
         Column(
@@ -19,8 +18,11 @@ class HeaderContainer2 extends StatelessWidget {
                 padding: const EdgeInsets.all(15),
               ),
             ),
-            Center(
-              child: Lottie.asset('assets/lottie/lottie.json'),
+            Container(
+              height: MediaQuery.of(context).size.height * 0.26,
+              child: Center(
+                child: Lottie.asset('assets/lottie/lottie.json'),
+              ),
             ),
             Center(
               child: Container(
