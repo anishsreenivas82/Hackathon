@@ -135,17 +135,19 @@ class _LoginPageState extends State<LoginPage> {
                                 if (documentSnapshot.exists) {
                                   check = documentSnapshot.get("choice");
                                 } else {
-                                  check = '0';
+                                  check = '(0)';
                                 }
                               });
-                              if (check == "(1)") {
+                              if (check == "(3)" ||
+                                  check == "(2)" ||
+                                  check == "(0)") {
+                                FirebaseAuth.instance.signOut();
+                                print("No account found");
+                              } else {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) => Donor()));
-                              } else {
-                                FirebaseAuth.instance.signOut();
-                                print("No account found");
                               }
                             } else if (choice == "(2)") {
                               FirebaseFirestore.instance
@@ -156,17 +158,19 @@ class _LoginPageState extends State<LoginPage> {
                                 if (documentSnapshot.exists) {
                                   check = documentSnapshot.get("choice");
                                 } else {
-                                  check = '0';
+                                  check = '(0)';
                                 }
                               });
-                              if (check == "(2)") {
+                              if (check == "(3)" ||
+                                  check == "(1)" ||
+                                  check == "(0)") {
+                                FirebaseAuth.instance.signOut();
+                                print("No account found");
+                              } else {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => Shelter_page  ()));
-                              } else {
-                                FirebaseAuth.instance.signOut();
-                                print("No account found");
+                                        builder: (context) => Shelter_page()));
                               }
                             } else if (choice == "(3)") {
                               FirebaseFirestore.instance
@@ -177,17 +181,19 @@ class _LoginPageState extends State<LoginPage> {
                                 if (documentSnapshot.exists) {
                                   check = documentSnapshot.get("choice");
                                 } else {
-                                  check = '0';
+                                  check = '(0)';
                                 }
                               });
-                              if (check == "(3)") {
+                              if (check == "(2)" ||
+                                  check == "(1)" ||
+                                  check == "(0)") {
+                                FirebaseAuth.instance.signOut();
+                                print("No account found");
+                              } else {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) => Volunteer()));
-                              } else {
-                                FirebaseAuth.instance.signOut();
-                                print("No account found");
                               }
                             }
                           } on FirebaseAuthException catch (e) {
