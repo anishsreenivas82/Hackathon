@@ -1,15 +1,21 @@
+
+
+
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:flutterlogindesign/pages/qr.dart';
-import 'package:flutterlogindesign/pages/qrscan.dart';
+
 import 'package:flutterlogindesign/pages/volunteer_page.dart';
 
 String doc;
 String uid;
 String qr_code;
+var tee;
+
 var name, type, quantity, babyproduct;
 
 class VerifcationPage extends StatefulWidget {
@@ -33,63 +39,53 @@ class _VerifcationPageState extends State<VerifcationPage> {
     radio2 = 0;
     radio3 = 0;
     i = 0;
-    name = "";
-    type = "";
-    quantity = "";
-    babyproduct = "";
+      name = "";
+      type = "";
+      quantity = "";
+      babyproduct = "";
     qrscan();
   }
 
-  // setRadio(value) {
-  //   setState(() {
-  //     radio = value;
-  //   });
-  // }
+  
+
+ 
+  Future<DocumentSnapshot> getUserInfo() async
+  {
+    
+    
+return await FirebaseFirestore.instance.collection("Owners").doc(uid).collection('items').doc(doc).get();
+
+  }
+  
 
   @override
   Widget build(BuildContext context) {
+    
+    
     CollectionReference a = FirebaseFirestore.instance.collection('Shelter');
     CollectionReference b = FirebaseFirestore.instance.collection('Owners');
 
     doc = qr_code.substring(0, 20);
     uid = qr_code.substring(20);
-
-    // for(int i=0;i<20;i++)
-    // {
-    //   doc = ''+qrcode[i];
-    // }
-    // for(int i=20;i<48;i++)
-    // {
-    //   uid = ''+qrcode[i];
-    // }
-
-    var info = FirebaseFirestore.instance
-        .collection('Owners')
-        .doc(uid)
-        .collection('items')
-        .doc(doc);
-    info.get().then((DocumentSnapshot documentSnapshot) {
-      if (documentSnapshot.exists) {
-        name = documentSnapshot.get('Name').toString();
-        type = documentSnapshot.get('Type').toString();
-        quantity = documentSnapshot.get('Quantity').toString();
-        babyproduct = documentSnapshot.get('Baby').toString();
-      } else
-        CircularProgressIndicator();
-      print("here");
-    });
-
     print(qr_code);
-    TextButton button;
-    // if(i<3) button = TextButton(onPressed: (){}, child: Text('Reject'));
-    // if(i>=3) button = TextButton(onPressed: (){}, child: Text('Accept'));
-
-    TextButton(onPressed: () {}, child: Text('Accept'));
+    print(doc);
+    print(name);
+    print(type);
     double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
 
-    return Scaffold(
+
+
+    return FutureBuilder(
+            future: getUserInfo(),
+            builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+              if (snapshot.connectionState == ConnectionState.done) {
+
+                
+                return  Scaffold(
+                  backgroundColor: Colors.amber[100],
       appBar: AppBar(
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.black,
         title: Text('VerifcationPage'),
         centerTitle: true,
       ),
@@ -98,51 +94,58 @@ class _VerifcationPageState extends State<VerifcationPage> {
           Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
             Text(
               'Name',
-              style: TextStyle(fontSize: 15),
+              style: TextStyle(fontSize: 22),
             ),
+            Text('-',style: TextStyle(fontSize: 25),),
             Text(
-              name,
-              style: TextStyle(fontSize: 15),
+              snapshot.data['Name'],
+              style: TextStyle(fontSize: 22),
             ),
           ]),
+          SizedBox(height: height*0.05),
           Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
             Text(
               'Type',
-              style: TextStyle(fontSize: 15),
+              style: TextStyle(fontSize: 22),
             ),
+            Text('-',style: TextStyle(fontSize: 25),),
             Text(
-              type,
-              style: TextStyle(fontSize: 15),
+              snapshot.data['Type'],
+              style: TextStyle(fontSize: 22),
             ),
           ]),
+          SizedBox(height: height*0.05),
           Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
             Text(
               'Quantity',
-              style: TextStyle(fontSize: 15),
-            ),
+              style: TextStyle(fontSize: 22),
+            ),Text('-',style: TextStyle(fontSize: 25),),
             Text(
-              quantity,
-              style: TextStyle(fontSize: 15),
+              snapshot.data['Quantity'],
+              style: TextStyle(fontSize: 22),
             ),
           ]),
+          SizedBox(height: height*0.05),
           Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
             Text(
               'Baby Product',
-              style: TextStyle(fontSize: 15),
-            ),
+              style: TextStyle(fontSize: 22),
+            ),Text('-',style: TextStyle(fontSize: 25),),
             Text(
-              babyproduct,
-              style: TextStyle(fontSize: 15),
+              snapshot.data['Baby'],
+              style: TextStyle(fontSize: 22),
             ),
           ]),
 
           SizedBox(height: 20),
+          Divider(height: 3,color: Colors.black,),
 
           Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                  child: Wrap(children: [Text('Are the products sealed?')]),
-                  width: width * 0.6),
+                  child: Wrap(children: [Text('Are the products sealed?',style: TextStyle(fontSize: 18),)]),
+                  width: width * 0.8),
               Radio(
                   value: 1,
                   groupValue: radio1,
@@ -158,12 +161,13 @@ class _VerifcationPageState extends State<VerifcationPage> {
           SizedBox(height: 20),
 
           Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
                   child: Wrap(children: [
-                    Text('Do the products have atleast 2 weeks before expiry')
+                    Text('Do the products have atleast 2 weeks before expiry?',style: TextStyle(fontSize: 18),)
                   ]),
-                  width: width * 0.6),
+                  width: width * 0.8),
               Radio(
                   value: 2,
                   groupValue: radio2,
@@ -178,12 +182,13 @@ class _VerifcationPageState extends State<VerifcationPage> {
           SizedBox(height: 20),
 
           Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
                   child: Wrap(children: [
-                    Text('Do the products match the description above')
+                    Text('Do the products match the description above?',style: TextStyle(fontSize: 18),)
                   ]),
-                  width: width * 0.6),
+                  width: width * 0.8),
               Radio(
                   value: 3,
                   groupValue: radio3,
@@ -198,6 +203,7 @@ class _VerifcationPageState extends State<VerifcationPage> {
           SizedBox(height: 20),
 
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               TextButton(
                   onPressed: () {
@@ -221,57 +227,55 @@ class _VerifcationPageState extends State<VerifcationPage> {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => Volunteer()));
                   },
-                  child: Text('Accept')),
+                  child: Text('Accept',style: TextStyle(fontSize: 25,color: Colors.green),)),
               TextButton(
+                
                   onPressed: () {
                     b.doc(uid).collection('items').doc(doc).delete();
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => Volunteer()));
                   },
-                  child: Text('Reject'))
+                  child: Text('Reject',style: TextStyle(fontSize: 25,color: Colors.red),))
             ],
           )
 
-          //   Text('Do the products have more than 2 weeks of time before expiry?'),
-          //   Text('Does the product match the description?')
 
-          // ]),
-          //           ),
-          // Column(children: [
-          //   Radio(
-          //   value: 1,
-          //   groupValue: 0,
-          //   onChanged: (value) {
-          //     setRadio();
-          //     i++;
-          //   }),
-          //   Radio(
-          //   value: 1,
-          //   groupValue: 0,
-          //   onChanged: (value) {
-          //     setRadio();
-          //     i++;
-          //   }),
-          //   Radio(
-          //   value: 1,
-          //   groupValue: 0,
-          //   onChanged: (value) {
-          //     setRadio();
-          //     i++;
-          //   })
-          // ],)
-          //           ]),
         ]),
       ),
-    );
+    ) ;
+              } else if (snapshot.connectionState == ConnectionState.none) {
+                return Text("No data");
+              }
+              return CircularProgressIndicator();
+            },
+          );
+
+   
+
+    
+
+    
+    
+
   }
 
   Future<void> qrscan() async {
     try {
       qr_code = await FlutterBarcodeScanner.scanBarcode(
           '#ff6666', 'Cancel', true, ScanMode.QR);
+          setState(() {
+            return;
+          });
+
+
     } on PlatformException {
       qr_code = 'Error';
     }
   }
 }
+
+
+    
+    
+
+
