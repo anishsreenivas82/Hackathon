@@ -28,6 +28,7 @@ class _RegPageState extends State<RegPage> {
     TextEditingController emailcontroller = new TextEditingController();
     TextEditingController passwordcontroller = new TextEditingController();
     TextEditingController phonecontroller = new TextEditingController();
+    TextEditingController addresscontroller = new TextEditingController();
     String id;
     FirebaseFirestore.instance
         .collection('Tracker')
@@ -74,6 +75,11 @@ class _RegPageState extends State<RegPage> {
                         icon: Icons.phone_android_outlined,
                         myController: phonecontroller,
                         obscure: false),
+                    _textInput(
+                        hint: "Address",
+                        icon: Icons.location_city,
+                        myController: addresscontroller,
+                        obscure: false),
                     SizedBox(height: 15),
                     Center(
                       child: ButtonWidget(
@@ -93,6 +99,8 @@ class _RegPageState extends State<RegPage> {
                                   .set({
                                 'Email': emailcontroller.text,
                                 'Password': passwordcontroller.text,
+                                'Phone': phonecontroller.text,
+                                'Address': addresscontroller.text,
                                 'choice': choice,
                               });
                               Navigator.push(
@@ -106,6 +114,8 @@ class _RegPageState extends State<RegPage> {
                                   .set({
                                 'Email': emailcontroller.text,
                                 'Password': passwordcontroller.text,
+                                'Phone': phonecontroller.text,
+                                'Address': addresscontroller.text,
                                 'choice': choice,
                               });
                               Navigator.push(
@@ -119,6 +129,8 @@ class _RegPageState extends State<RegPage> {
                                   .set({
                                 'Email': emailcontroller.text,
                                 'Password': passwordcontroller.text,
+                                'Phone': phonecontroller.text,
+                                'Address': addresscontroller.text,
                                 'choice': choice,
                               });
                               Navigator.push(
@@ -135,33 +147,31 @@ class _RegPageState extends State<RegPage> {
                                   timeInSecForIosWeb: 1,
                                   backgroundColor: Colors.red,
                                   textColor: Colors.white,
-                                  fontSize: 16.0
-                                  );
+                                  fontSize: 16.0);
                               print('The password provided is too weak.');
-                            } else if (e.code == 'email-already-in-use') { 
+                            } else if (e.code == 'email-already-in-use') {
                               Fluttertoast.showToast(
-                                  msg: "The account already exists for that email.",
+                                  msg:
+                                      "The account already exists for that email.",
                                   toastLength: Toast.LENGTH_LONG,
                                   gravity: ToastGravity.BOTTOM,
                                   timeInSecForIosWeb: 1,
                                   backgroundColor: Colors.red,
                                   textColor: Colors.white,
-                                  fontSize: 16.0
-                                  );
+                                  fontSize: 16.0);
 
                               print(
                                   'The account already exists for that email.');
                             }
                           } catch (e) {
                             Fluttertoast.showToast(
-                                  msg: "$e",
-                                  toastLength: Toast.LENGTH_LONG,
-                                  gravity: ToastGravity.BOTTOM,
-                                  timeInSecForIosWeb: 1,
-                                  backgroundColor: Colors.red,
-                                  textColor: Colors.white,
-                                  fontSize: 16.0
-                                  );
+                                msg: "$e",
+                                toastLength: Toast.LENGTH_LONG,
+                                gravity: ToastGravity.BOTTOM,
+                                timeInSecForIosWeb: 1,
+                                backgroundColor: Colors.red,
+                                textColor: Colors.white,
+                                fontSize: 16.0);
 
                             print(e);
                           }
