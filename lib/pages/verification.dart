@@ -208,18 +208,18 @@ return await FirebaseFirestore.instance.collection("Owners").doc(uid).collection
               TextButton(
                   onPressed: () {
                     a.doc('donations').collection('donations').doc(doc).set({
-                      'Name': name,
-                      'Type': type,
-                      'Quantity': quantity,
-                      'Baby': babyproduct,
+                      'Name': snapshot.data['Name'],
+                      'Type': snapshot.data['Type'],
+                      'Quantity': snapshot.data['Quantity'],
+                      'Baby': snapshot.data['Baby'],
                       'Status': 'Verified',
                     });
                     
                     b.doc(uid).collection('verified items').doc(doc).set({
-                      'Name': name,
-                      'Type': type,
-                      'Quantity': quantity,
-                      'Baby': babyproduct,
+                      'Name': snapshot.data['Name'],
+                      'Type': snapshot.data['Type'],
+                      'Quantity':snapshot.data['Quantity'],
+                      'Baby': snapshot.data['Baby'],
                       'Status': 'Verified',
                     });
 
