@@ -62,38 +62,82 @@ class _VolunteerState extends State<Volunteer> {
               Map<String, dynamic> data =
                   document.data() as Map<String, dynamic>;
               return Container(
-                height: height * 0.25,
-                padding: EdgeInsets.fromLTRB(
-                    width * 0.01, height * 0.01, width * 0.01, height * 0.01),
-                child: new Card(
-                  child: InkWell(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Text(
-                          'Item Name-' + data['Name'].toString(),
-                          style: TextStyle(fontSize: 15),
-                        ),
-                        Text(
-                          'Address-' + data['Address'].toString(),
-                          style: TextStyle(fontSize: 15),
-                        ),
-                        Text(
-                          'Phone Number-' + data['Phno'].toString(),
-                          style: TextStyle(fontSize: 15),
-                        ),
-                        // Row(
-                        //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        //   children: [
-                        //   Text('Quantity-'+ data['Quantity'].toString(),
-                        //   style: TextStyle(fontSize: 15),),
-                        //   Text('Baby Product-'+ data['Baby'].toString(),
-                        //   style: TextStyle(fontSize: 15),)
-                        // ])
-                      ],
-                    ),
-                    onTap: () => {
-                      FirebaseFirestore.instance
+                  child:Container(
+                  height: height * 0.40,
+                  padding: EdgeInsets.fromLTRB(
+                      width * 0.03, height * 0.01, width * 0.03, height * 0.01),
+                  child: Container(
+                    child: new Card(
+                      elevation: 20,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(width*0.1),
+                      ),
+                      child: InkWell(
+                        child: Padding(
+                          padding:  EdgeInsets.all(width*0.04),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Row(
+                                children: [
+                                  Icon(
+                                    Icons.lightbulb,
+                                    color: Colors.amber,
+                                  ),
+                                  Text(
+                                    'Name:',
+                                    style: TextStyle(fontSize: 15),
+                                  ),
+                                  SizedBox(
+                                    width: 4,
+                                  ),
+                                  Text(data['Name'].toString()),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              Row(
+                                children: [
+                                  Icon(
+                                    Icons.lightbulb,
+                                    color: Colors.amber,
+                                  ),
+                                  Text(
+                                    'Address:',
+                                    style: TextStyle(fontSize: 15),
+                                  ),
+                                  SizedBox(
+                                    width: 4,
+                                  ),
+                                  Text(data['Address'].toString()),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              Row(
+                                children: [
+                                  Icon(
+                                    Icons.lightbulb,
+                                    color: Colors.amber,
+                                  ),
+                                  Text(
+                                    'Phone Number:',
+                                    style: TextStyle(fontSize: 15),
+                                  ),
+                                  SizedBox(
+                                    width: 4,
+                                  ),
+                                  Text(data['Phno'].toString()),
+                                  
+                                ],
+                              ),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              ElevatedButton(onPressed:(){
+                                    FirebaseFirestore.instance
                           .collection('Volunteer')
                           .doc(uidVolunteer)
                           .collection('accepted verifications')
@@ -106,16 +150,9 @@ class _VolunteerState extends State<Volunteer> {
                               .doc('pending verifications')
                               .collection('pending verifications')
                               .doc(document.id)
-                              .delete()),
-                      // generatedID = document.id.toString() + uidDonor.toString(),
-                      // Navigator.push(context,
-                      //     MaterialPageRoute(builder: (context) => Qrcode()))
-                    },
-                  ),
-                  // title: new Text(data['Name'].toString()),
-                  // subtitle: new Text(data['Type'].toString()),
-                ),
-              );
+                              .delete());
+                                  }, child:Text('Accept',style: TextStyle(fontSize: 15)))
+                            ])))))));
             }).toList(),
           );
         },
@@ -147,46 +184,80 @@ class _VolunteerState extends State<Volunteer> {
               Map<String, dynamic> data =
                   document.data() as Map<String, dynamic>;
               return Container(
-                height: height * 0.25,
-                padding: EdgeInsets.fromLTRB(
-                    width * 0.01, height * 0.01, width * 0.01, height * 0.01),
-                child: new Card(
-                  child: InkWell(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Text(
-                          'Item Name-' + data['Name'].toString(),
-                          style: TextStyle(fontSize: 15),
-                        ),
-                        Text(
-                          'Address-' + data['Address'].toString(),
-                          style: TextStyle(fontSize: 15),
-                        ),
-                        Text(
-                          'Phone Number-' + data['Phno'].toString(),
-                          style: TextStyle(fontSize: 15),
-                        ),
-                        // Row(
-                        //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        //   children: [
-                        //   Text('Quantity-'+ data['Quantity'].toString(),
-                        //   style: TextStyle(fontSize: 15),),
-                        //   Text('Baby Product-'+ data['Baby'].toString(),
-                        //   style: TextStyle(fontSize: 15),)
-                        // ])
-                      ],
-                    ),
-                    // onTap: () => {
-                    //   // generatedID = document.id.toString() + uidDonor.toString(),
-                    //   // Navigator.push(context,
-                    //   //     MaterialPageRoute(builder: (context) => Qrcode()))
-                    // },
-                  ),
-                  // title: new Text(data['Name'].toString()),
-                  // subtitle: new Text(data['Type'].toString()),
-                ),
-              );
+                  child:Container(
+                  height: height * 0.40,
+                  padding: EdgeInsets.fromLTRB(
+                      width * 0.03, height * 0.01, width * 0.03, height * 0.01),
+                  child: Container(
+                    child: new Card(
+                      elevation: 20,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(width*0.1),
+                      ),
+                      child: InkWell(
+                        child: Padding(
+                          padding:  EdgeInsets.all(width*0.04),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Row(
+                                children: [
+                                  Icon(
+                                    Icons.lightbulb,
+                                    color: Colors.amber,
+                                  ),
+                                  Text(
+                                    'Name:',
+                                    style: TextStyle(fontSize: 15),
+                                  ),
+                                  SizedBox(
+                                    width: 4,
+                                  ),
+                                  Text(data['Name'].toString()),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              Row(
+                                children: [
+                                  Icon(
+                                    Icons.lightbulb,
+                                    color: Colors.amber,
+                                  ),
+                                  Text(
+                                    'Address:',
+                                    style: TextStyle(fontSize: 15),
+                                  ),
+                                  SizedBox(
+                                    width: 4,
+                                  ),
+                                  Text(data['Address'].toString()),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              Row(
+                                children: [
+                                  Icon(
+                                    Icons.lightbulb,
+                                    color: Colors.amber,
+                                  ),
+                                  Text(
+                                    'Phone Number:',
+                                    style: TextStyle(fontSize: 15),
+                                  ),
+                                  SizedBox(
+                                    width: 4,
+                                  ),
+                                  Text(data['Phno'].toString()),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 5,
+                              ),
+                            ])))))));
             }).toList(),
           );
         },
