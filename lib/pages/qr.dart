@@ -21,12 +21,19 @@ class _State extends State<Qrcode> {
               padding: EdgeInsets.fromLTRB(0, height*0.3,0, height*0.01),
                           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
                   Center(
-                    child: BarcodeWidget(
+                    
+                    child: Container(
+                      height: MediaQuery.of(context).size.height*0.4,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                      ),
+                      child: BarcodeWidget(
           barcode: Barcode.qrCode(),
           color: Colors.white,
           data: generatedID ?? "Hello World",
           width: 200,
           height: 200,
+                      ),
                     ),
                   ),
                   SizedBox(

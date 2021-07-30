@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutterlogindesign/pages/shelter_prev_donations.dart';
 import 'package:flutterlogindesign/pages/shelter_verified_donations.dart';
 import 'package:flutterlogindesign/pages/splash_screen.dart';
 
@@ -97,8 +98,8 @@ class _Shelter_pageState extends State<Shelter_page> {
                             Icons.verified,
                             color: Colors.green,
                           ),
-                          title: Text('Pending Donations'),
-                          subtitle: Text('View donations which are on their way'),
+                          title: Text('Previously recived donations'),
+                          subtitle: Text('View donations which you had requested for before'),
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
@@ -106,8 +107,8 @@ class _Shelter_pageState extends State<Shelter_page> {
                             TextButton(
                               child: const Text('View'),
                               onPressed: () {
-                            //     Navigator.push(context,
-                            // MaterialPageRoute(builder: (context) => Verified()));
+                                Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => Shelter_Prev()));
                               },
                             ),
                             const SizedBox(width: 8),
@@ -117,41 +118,7 @@ class _Shelter_pageState extends State<Shelter_page> {
                     ),
                   ),
                 )),
-            Container(
-                height: MediaQuery.of(context).size.height * 0.23,
-                child: Center(
-                  child: Card(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                        const ListTile(
-                          leading: Icon(
-                            Icons.history,
-                            color: Colors.yellow,
-                          ),
-                          title: Text('Previously Accepted Donations'),
-                          subtitle: Text(
-                              'View all donations which were accepted'),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: <Widget>[
-                            TextButton(
-                              child: const Text('View'),
-                              onPressed: () {
-                                // Navigator.push(
-                                //     context,
-                                    // MaterialPageRoute(
-                                    //     builder: (context) => PendingOrders()));
-                              },
-                            ),
-                            const SizedBox(width: 8),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                )),
+            
           ],
         ),
       ),

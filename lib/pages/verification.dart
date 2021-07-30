@@ -208,6 +208,7 @@ class _VerifcationPageState extends State<VerifcationPage> {
                       'Baby': babyproduct,
                       'Status': 'Verified',
                     });
+                    
                     b.doc(uid).collection('verified items').doc(doc).set({
                       'Name': name,
                       'Type': type,
