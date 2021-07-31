@@ -25,29 +25,29 @@ Once a product is verified and accepted, it shows up on the shelter’s page as 
 
 <!-- ### OTP Verification -->
 
-<img src = "https://user-images.githubusercontent.com/77959565/119698663-15200780-be6f-11eb-9c53-fc9b3c90019c.jpeg" width="250" hspace="10"/>
+<img src = "https://user-images.githubusercontent.com/72306130/127724352-f96598b1-09c1-495d-b357-25157a1e7f15.jpg" width="250" hspace="10"/>
 <!-- ![OTPVerification](https://user-images.githubusercontent.com/77959565/119698663-15200780-be6f-11eb-9c53-fc9b3c90019c.jpeg) -->
   </p>
   
 <p float = "left">
 <!-- ### Dashboard -->
-<img src = "https://user-images.githubusercontent.com/77959565/119698848-47316980-be6f-11eb-94c9-c233c35f7915.jpeg" width="250" hspace="10"/>
+<img src = "https://user-images.githubusercontent.com/72306130/127724380-0f698343-3a94-45df-a820-483410a7360a.jpg" width="250" hspace="10"/>
 <!-- ![Dashboard](https://user-images.githubusercontent.com/77959565/119698848-47316980-be6f-11eb-94c9-c233c35f7915.jpeg) -->
 
 <!-- ### Navigation -->
-<img src = "https://user-images.githubusercontent.com/77959565/119699117-73e58100-be6f-11eb-8a96-8e4f1a2bb307.jpeg" width="250" hspace="10"/>
+<img src = "https://user-images.githubusercontent.com/72306130/127724411-08554f45-f5ae-43ad-8c9f-907304269ccc.jpg" width="250" hspace="10"/>
 <!-- ![Navigation](https://user-images.githubusercontent.com/77959565/119699117-73e58100-be6f-11eb-8a96-8e4f1a2bb307.jpeg) -->
 
 <!-- ### Cars -->
-<img src = "https://user-images.githubusercontent.com/77959565/119699231-8e1f5f00-be6f-11eb-8d98-d5fd21bffebb.jpeg" width="250" hspace="10"/>
+<img src = "https://user-images.githubusercontent.com/72306130/127724452-cc4eaacc-aa73-4e58-992d-55f773481a38.jpg" width="250" hspace="10"/>
 <!-- ![Carss](https://user-images.githubusercontent.com/77959565/119699231-8e1f5f00-be6f-11eb-8d98-d5fd21bffebb.jpeg)-->
   </p>
 <p float = "left">
 <!-- ### Bill Page -->
-<img src = "https://user-images.githubusercontent.com/77959565/119699345-b313d200-be6f-11eb-9265-142f98c519a6.jpeg" width="250" hspace="10"/>
+<img src = "https://user-images.githubusercontent.com/72306130/127724475-86436df7-92fb-4385-a2cd-55665f0942e0.jpg" width="250" hspace="10"/>
 <!-- ![BillPage](https://user-images.githubusercontent.com/77959565/119699345-b313d200-be6f-11eb-9265-142f98c519a6.jpeg)
  -->
 <!-- ### Payment Authentication -->
-<img src = "https://user-images.githubusercontent.com/77959565/119699444-cde64680-be6f-11eb-918a-0994a3d7063f.jpeg" width="250" hspace="10"/>
+<img src = "https://user-images.githubusercontent.com/72306130/127724508-d1f08dcc-bc64-4dcc-88cf-37c381720dbf.jpg" width="250" hspace="10"/>
 <!-- ![PaymentAuth](https://user-images.githubusercontent.com/77959565/119699444-cde64680-be6f-11eb-918a-0994a3d7063f.jpeg) -->
   </p>
