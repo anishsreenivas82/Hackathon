@@ -12,6 +12,9 @@ A Donor, i.e, a store or a hotel willing to donate, enters the product details a
 This now falls into the volunteer’s court. A volunteer registers through the app and enters in their location. He/she can now view a list of products which are to be verified. On accepting a verification request based on convenience, the volunteer proceeds to verify the product on-spot. Simply scan the product’s QR code, upon which product details and checkboxes come up. After inspection, a product can be accepted or declined.   
 Once a product is verified and accepted, it shows up on the shelter’s page as ‘Available donations’ and the donor’s dashboard under ‘Accepted donations’.  
 
+## Video Link
+https://youtu.be/_1wFOyHxqYg
+
 ## Screenshots        
 <p float = "left">
 
