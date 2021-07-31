@@ -15,7 +15,7 @@ Once a product is verified and accepted, it shows up on the shelter’s page as 
 <p float = "left">
 
 <!-- ### Main Page: -->
-<img src = ![Screenshot_20210731-055825](https://user-images.githubusercontent.com/72306130/127724240-4f0d64a5-594c-4b5a-bffe-e40a62aef269.jpg) width="250" hspace="10"/>
+<img src = "https://user-images.githubusercontent.com/72306130/127724240-4f0d64a5-594c-4b5a-bffe-e40a62aef269.jpg" width="250" hspace="10"/>
 <!-- ![Main page](https://user-images.githubusercontent.com/77959565/119697462-d5a4eb80-be6d-11eb-8220-64762d06d794.jpeg ) -->
 
 <!-- ### Sign In -->
