@@ -50,4 +50,5 @@ Once a product is verified and accepted, it shows up on the shelter’s page as 
 <!-- ### Payment Authentication -->
 <img src = "https://user-images.githubusercontent.com/72306130/127724508-d1f08dcc-bc64-4dcc-88cf-37c381720dbf.jpg" width="250" hspace="10"/>
 <!-- ![PaymentAuth](https://user-images.githubusercontent.com/77959565/119699444-cde64680-be6f-11eb-918a-0994a3d7063f.jpeg) -->
+ <img src = "https://user-images.githubusercontent.com/72306130/127724566-e6cdf538-b8dd-4a40-b447-165b717a679b.png" width="250" hspace="10"/>
   </p>
